@@ -12,13 +12,11 @@ import { loginRouter } from './src/routes/loginRoutes.js';
 // Server setup
 const app = express();
 const http = createServer(app);
-const io = new Server(http, {
-  cors: { origin: '*' }
-});
+export const io = new Server(http);
+export const store = new session.MemoryStore();
 
 // Views setup
 app.set('views', path.join(process.cwd(), 'src/views'));
-console.log(path.join(process.cwd(), 'src/views'));
 app.use(express.static('src/public'));
 
 // Middleware
@@ -27,7 +25,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: process.env.SESSION_SECRET, // go bati
   saveUninitialized: false,
-  resave: false
+  resave: false,
+  store
 }))
 
 // Routes
