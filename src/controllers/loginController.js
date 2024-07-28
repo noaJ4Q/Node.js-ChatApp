@@ -1,10 +1,9 @@
 export class loginController {
-  static page(req, res) {
-    res.render('login.ejs');
+  static showPage(req, res) {
+    res.status(200).render('login.ejs');
   }
 
   static login(req, res) {
-    console.log(req.body);
     const { name, lastName, rememberMe } = req.body;
 
     req.session.user = { name, lastName };

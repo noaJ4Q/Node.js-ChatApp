@@ -27,6 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: process.env.SESSION_SECRET, // go bati
   saveUninitialized: false,
+  resave: false
 }))
 
 // Routes
