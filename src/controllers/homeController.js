@@ -1,5 +1,8 @@
 export class homeController {
   static showPage(req, res) {
+
+
+
     res.status(200).render('home.ejs');
   }
 

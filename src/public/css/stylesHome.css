@@ -40,6 +40,15 @@ main {
 
 #chats-panel {
   background-color: white;
+  border-right: 3px solid var(--third-color);
+}
+
+#chats-panel .title {
+  padding: 1.8rem;
+  border-bottom: 3px solid var(--third-color);
+}
+
+#chats-list {
   padding: 1.8rem;
 }
 
@@ -52,6 +61,7 @@ main {
 
 #chats-list .chat:hover {
   background-color: var(--fourth-color);
+  cursor: pointer;
 }
 
 #chats-list .chat .avatar {
@@ -73,16 +83,16 @@ main {
   display: grid;
   grid-template-rows: auto 1fr auto;
   background-color: white;
-  border-left: 3px solid var(--third-color);
 }
 
-#messages-panel #title {
+#messages-panel .title {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: 1fr 1fr;
+  border-bottom: 3px solid var(--third-color);
 }
 
-#title .avatar {
+#messages-panel .title .avatar {
   grid-row: span 2;
   width: 50px;
   height: 50px;
@@ -126,4 +136,14 @@ main {
   border: 3px solid var(--third-color);
   border-radius: 5px;
   outline: none;
+}
+
+/*-----------------------------*/
+
+#no-messages-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
 }

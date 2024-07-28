@@ -12,17 +12,19 @@
 <body>
   <main>
     <section id="sidebar">
-      <a href="/individuals">icon 1</a>
+      <a href="/home">icon 1</a>
       <a href="/groups">icon 2</a>
       <a href="/home/logout">logout</a>
     </section>
     <section id="chats-panel">
-      <h1>Messages</h1>
-      <form action="/" id="search-form">
-        <label for="search">search</label>
-        <input type="text" placeholder="Search messages, users" name="search" id="search">
-      </form>
+      <div class="title">
+        <h1>Messages</h1>
+      </div>
       <div id="chats-list">
+        <form action="/" id="search-form">
+          <label for="search">search</label>
+          <input type="text" placeholder="Search messages, users" name="search" id="search">
+        </form>
         <div class="chat">
           <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/">
           <h3 class="name">Name 1</h3>
@@ -37,41 +39,7 @@
         </div>
       </div>
     </section>
-    <secion id="messages-panel">
-      <div id="title">
-        <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/">
-        <h2>User name</h2>
-        <p>status</p>
-      </div>
-      <div id="messages">
-        <div class="receiver">
-          <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/">
-          <div class="messages">
-            <p class="message">
-              <span>message 1</span>
-            </p>
-            <p class="message">
-              <span>message 2</span>
-            </p>
-            <p class="message">
-              <span>message 3</span>
-            </p>
-          </div>
-        </div>
-        <div class="sender messages">
-          <p class="message">
-            <span>message 1</span>
-          </p>
-          <p class="message">
-            <span>message 2</span>
-          </p>
-        </div>
-      </div>
-      <div id="message-box">
-        <input type="text" placeholder="Type a message" name="message" id="message">
-        <input type="submit" value="send">
-      </div>
-    </secion>
+    <%- include('partials/noChat.ejs') %>
   </main>
 </body>
 
