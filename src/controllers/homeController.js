@@ -1,5 +1,5 @@
 export class homeController {
-  static page(req, res) {
+  static showPage(req, res) {
     res.render('home.ejs');
   }
 

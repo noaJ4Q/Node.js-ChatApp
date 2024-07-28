@@ -4,5 +4,5 @@ import { homeController } from '../controllers/homeController.js';
 export const homeRouter = Router();
 
 // /home
-homeRouter.get('/', homeController.page);
+homeRouter.get('/', homeController.showPage);
 homeRouter.get('/logout', homeController.logout);
