@@ -25,7 +25,7 @@ app.use(express.static('src/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
-  secret: 'go bati',
+  secret: process.env.SESSION_SECRET, // go bati
   saveUninitialized: false,
   cookie: {
     maxAge: 60 * 60 * 1000
