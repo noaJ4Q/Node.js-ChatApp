@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <link rel="stylesheet" href="css/stylesLogin.css">
+</head>
+
+<body>
+  <main>
+    <div id="welcome-card">
+      <h1>Welcome to </br>chat application</h1>
+      <form method="post" action="/login" id="welcome-form">
+        <input type="text" placeholder="Name" name="name" id="name">
+        <input type="text" placeholder="Last name" name="lastName" id="last-name">
+        <section id="remember-me">
+          <input type="checkbox" name="rememberMe" id="remember">
+          <label for="remember">Remember me</label>
+        </section>
+        <input type="submit" value="Start chat">
+      </form>
+    </div>
+  </main>
+</body>
+
+</html>
