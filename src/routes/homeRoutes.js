@@ -4,6 +4,5 @@ import { isAuthenticated } from '../middlewares/authentication.js';
 
 export const homeRouter = Router();
 
-// /home
-homeRouter.get('/', isAuthenticated, homeController.showPage);
-homeRouter.get('/logout', homeController.logout);
+homeRouter.get('/home', isAuthenticated, homeController.showPage);
+homeRouter.get('/home/logout', homeController.logout);

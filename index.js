@@ -30,16 +30,13 @@ app.use(session({
 }))
 
 // Routes
-app.use('/home', homeRouter);
+app.use('/', homeRouter);
 app.use('/', loginRouter);
 
 io.on('connection', (socket) => {
   console.log('new connection: ' + socket.id);
 
-  socket.on('message', (message) => {
-    console.log(`message from ${socket.id}: ${message}`);
-    io.emit('message', message);
-  });
+  io.emit('individual chats', store.sessions);
 
   socket.on('disconnect', () => {
     console.log('disconnected: ' + socket.id);
