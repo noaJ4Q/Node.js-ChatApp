@@ -4,17 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title>Chat</title>
 
   <link rel="stylesheet" href="css/stylesHome.css">
-  <script defer type="module" src="js/scriptsHome.js"></script>
 </head>
 
 <body>
   <main>
     <%- include('partials/sidebar.ejs') %>
       <%- include('partials/chatsPanel.ejs') %>
-        <%- include('partials/noMessagesPanel.ejs') %>
+        <%- include('partials/messagesPanel.ejs') %>
   </main>
 </body>
 

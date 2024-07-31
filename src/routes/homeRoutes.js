@@ -5,4 +5,5 @@ import { isAuthenticated } from '../middlewares/authentication.js';
 export const homeRouter = Router();
 
 homeRouter.get('/home', isAuthenticated, homeController.showPage);
+homeRouter.get('/home/chat/:id', isAuthenticated, homeController.showChat);
 homeRouter.get('/home/logout', homeController.logout);

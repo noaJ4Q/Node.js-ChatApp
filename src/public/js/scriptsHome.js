@@ -6,12 +6,11 @@ const chatsList = document.getElementById('chats-list');
 socket.on('individual chats', (data) => {
   for (const sessionID in data) {
     const sessionData = JSON.parse(data[sessionID]);
-    console.log(sessionData);
-    renderChat(sessionData);
+    renderChat(sessionID, sessionData);
   }
 });
 
-function renderChat(sessionData) {
+function renderChat(sessionID, sessionData) {
   const { name, lastName } = sessionData.user;
 
   const chatPicture = document.createElement('img');
@@ -38,5 +37,9 @@ function renderChat(sessionData) {
   newChat.appendChild(chatContent);
   newChat.appendChild(chatTime);
 
-  chatsList.appendChild(newChat);
+  const newLinkChat = document.createElement('a');
+  newLinkChat.href = `/home/chat/${sessionID}`;
+  newLinkChat.appendChild(newChat);
+
+  chatsList.appendChild(newLinkChat);
 }
