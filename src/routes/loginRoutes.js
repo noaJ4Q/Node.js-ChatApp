@@ -4,5 +4,6 @@ import { isAuthenticated } from '../middlewares/authentication.js';
 
 export const loginRouter = Router();
 
-loginRouter.get('/', isAuthenticated, loginController.showPage);
+// loginRouter.get('/', isAuthenticated, loginController.showPage);
+loginRouter.get('/', loginController.showPage);
 loginRouter.post('/login', loginController.login);

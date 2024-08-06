@@ -20,23 +20,44 @@ app.set('views', path.join(process.cwd(), 'src/views'));
 app.use(express.static('src/public'));
 
 // Middleware
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({
+const sessionMiddleware = session({
   secret: process.env.SESSION_SECRET, // go bati
   saveUninitialized: false,
   resave: false,
   store
-}))
+});
+app.use(morgan('dev'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(sessionMiddleware);
+io.engine.use(sessionMiddleware);
 
 // Routes
 app.use('/', homeRouter);
 app.use('/', loginRouter);
 
+// Socket
 io.on('connection', (socket) => {
   console.log('new connection: ' + socket.id);
 
-  io.emit('individual chats', store.sessions);
+  io.emit('reqSocketsID');
+
+  // Receiving socket ID from each client
+  socket.on('resSocketID', async (socketID) => {
+
+    // get socket object based on socketID to get session object
+    const sockets = await io.fetchSockets();
+    const socketFiltered = sockets.find(s => s.id === socketID);
+    // get sessionID from session object
+    const sessionID = socketFiltered.request.session.id;
+    // use sessionID to filter sessions and get chat rooms
+    const chatRoomsPerUser = filterChats(store.sessions, sessionID);
+    // console.log(`----- chat rooms for user: ${sessionID} -----`);
+    // console.log(chatRoomsPerUser);
+
+    // return chat rooms to respective client
+    io.to(socketID).emit('chatRooms', chatRoomsPerUser);
+
+  });
 
   socket.on('disconnect', () => {
     console.log('disconnected: ' + socket.id);
@@ -46,3 +67,11 @@ io.on('connection', (socket) => {
 http.listen(8080, () => {
   console.log('Server running on http://localhost:8080');
 });
+
+function filterChats(sessions, userSessionID) {
+  return Object.keys(sessions).filter(sessionID => sessionID !== userSessionID)
+    .reduce((obj, key) => {
+      obj[key] = sessions[key];
+      return obj;
+    }, {});
+}

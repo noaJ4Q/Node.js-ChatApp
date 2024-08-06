@@ -1,4 +1,5 @@
-import { io } from "../../index.js";
+import { io } from '../../index.js';
+import { store } from '../../index.js';
 
 export class homeController {
 
@@ -7,7 +8,7 @@ export class homeController {
   }
 
   static showChat(req, res) {
-    const { id } = req.params;
+    const { sessionID } = req.params;
     console.log(req.session);
     res.status(200).render('chat.ejs');
   }

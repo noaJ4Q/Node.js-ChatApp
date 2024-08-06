@@ -10,3 +10,10 @@ export const isAuthenticated = (req, res, next) => {
   }
   next();
 }
+
+export const isAuthenticated2 = (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect('/');
+  }
+  next();
+}
