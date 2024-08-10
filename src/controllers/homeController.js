@@ -1,4 +1,3 @@
-import { io } from '../../index.js';
 import { store } from '../../index.js';
 
 export class homeController {
@@ -9,8 +8,8 @@ export class homeController {
 
   static showChat(req, res) {
     const { sessionID } = req.params;
-    console.log(req.session);
-    res.status(200).render('chat.ejs');
+    const user = JSON.parse(store.sessions[sessionID]).user;
+    res.status(200).render('chat.ejs', { user: user });
   }
 
   static logout(req, res) {

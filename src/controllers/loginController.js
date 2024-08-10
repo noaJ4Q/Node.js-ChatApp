@@ -4,7 +4,6 @@ export class loginController {
   }
 
   static login(req, res) {
-    res.clearCookie('connect.sid');
     const { name, lastName, rememberMe } = req.body;
 
     req.session.user = { name, lastName };

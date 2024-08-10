@@ -12,12 +12,12 @@ import { loginRouter } from './src/routes/loginRoutes.js';
 // Server setup
 const app = express();
 const http = createServer(app);
-export const io = new Server(http);
+const io = new Server(http);
 export const store = new session.MemoryStore();
 
 // Views setup
 app.set('views', path.join(process.cwd(), 'src/views'));
-app.use(express.static('src/public'));
+app.use(express.static(path.join(process.cwd(), 'src/public')));
 
 // Middleware
 const sessionMiddleware = session({
