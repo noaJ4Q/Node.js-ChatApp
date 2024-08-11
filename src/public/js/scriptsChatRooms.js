@@ -3,13 +3,14 @@ import { socket } from '/js/scriptsCommon.js';
 const chatRoomsWrapper = document.getElementById('chats-wrapper');
 
 socket.on('reqSocketsID', () => {
+  console.log('req update');
   socket.emit('resSocketID', socket.id);
 });
 
 socket.on('chatRooms', (data) => {
+  chatRoomsWrapper.innerHTML = '';
   for (const sessionID in data) {
     const sessionData = JSON.parse(data[sessionID]);
-    chatRoomsWrapper.innerHTML = '';
     renderChatRoom(sessionID, sessionData);
   }
 });
