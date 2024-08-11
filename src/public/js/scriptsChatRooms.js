@@ -1,10 +1,5 @@
-import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
+import { socket } from '/js/scriptsCommon.js';
 
-export const socket = io({
-  auth: {
-    purpose: 'chatRooms'
-  }
-});
 const chatRoomsWrapper = document.getElementById('chats-wrapper');
 
 socket.on('reqSocketsID', () => {
@@ -15,11 +10,11 @@ socket.on('chatRooms', (data) => {
   for (const sessionID in data) {
     const sessionData = JSON.parse(data[sessionID]);
     chatRoomsWrapper.innerHTML = '';
-    renderChat(sessionID, sessionData);
+    renderChatRoom(sessionID, sessionData);
   }
 });
 
-function renderChat(sessionID, sessionData) {
+function renderChatRoom(sessionID, sessionData) {
   const { name, lastName } = sessionData.user;
 
   const chatPicture = document.createElement('img');

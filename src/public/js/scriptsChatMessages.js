@@ -1,4 +1,4 @@
-import { socket } from '/js/scriptsChatRooms.js';
+import { socket } from '/js/scriptsCommon.js';
 
 const chatMessagesWrapper = document.getElementById('messages');
 const chatInput = document.getElementById('message');
@@ -13,5 +13,9 @@ sendButton.onclick = () => {
 }
 
 socket.on('message', (message) => {
-  console.log(message);
+  renderMessage(message);
 })
+
+function renderMessage(message) {
+  console.log(message);
+}

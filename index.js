@@ -37,7 +37,7 @@ app.use('/', loginRouter);
 
 // Socket
 io.on('connection', (socket) => {
-  console.log(`new connection ${socket.id} - purpose: ${socket.handshake.auth.purpose}`);
+  console.log(`new connection ${socket.id}`);
 
   io.emit('reqSocketsID');
 
@@ -60,15 +60,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('message', async ({ message, receiverSessionID }) => {
-    // const { message, receiverSessionID } = data;
-    // option 1: find socket based on sessionID
     const sockets = await io.fetchSockets();
     const socketFiltered = sockets.find(s => s.request.session.id === receiverSessionID);
     const receiverSocketID = socketFiltered.id;
     console.log(`--- message to: ${receiverSessionID} --- socketID: ${receiverSocketID}`);
     io.to(receiverSocketID).emit('message', message);
-
-    // option 2: chat room must be a room and send message to that room
   })
 
   socket.on('disconnect', () => {
