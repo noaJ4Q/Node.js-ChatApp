@@ -1,7 +1,11 @@
 import { io } from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
 
-const socket = io();
-const chatsWrapper = document.getElementById('chats-wrapper');
+export const socket = io({
+  auth: {
+    purpose: 'chatRooms'
+  }
+});
+const chatRoomsWrapper = document.getElementById('chats-wrapper');
 
 socket.on('reqSocketsID', () => {
   socket.emit('resSocketID', socket.id);
@@ -10,7 +14,7 @@ socket.on('reqSocketsID', () => {
 socket.on('chatRooms', (data) => {
   for (const sessionID in data) {
     const sessionData = JSON.parse(data[sessionID]);
-    chatsWrapper.innerHTML = '';
+    chatRoomsWrapper.innerHTML = '';
     renderChat(sessionID, sessionData);
   }
 });
@@ -46,5 +50,5 @@ function renderChat(sessionID, sessionData) {
   newLinkChat.href = `/home/chat/${sessionID}`;
   newLinkChat.appendChild(newChat);
 
-  chatsWrapper.appendChild(newLinkChat);
+  chatRoomsWrapper.appendChild(newLinkChat);
 }

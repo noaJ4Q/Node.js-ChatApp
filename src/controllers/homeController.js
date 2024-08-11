@@ -9,6 +9,7 @@ export class homeController {
   static showChat(req, res) {
     const { sessionID } = req.params;
     const user = JSON.parse(store.sessions[sessionID]).user;
+    user.sessionID = sessionID;
     res.status(200).render('chat.ejs', { user: user });
   }
 

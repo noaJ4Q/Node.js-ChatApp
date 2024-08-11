@@ -31,7 +31,8 @@
     </div>
   </div>
   <div id="message-box">
+    <input type="hidden" name="user" value="<%= user.sessionID %>" id="receiver">
     <input type="text" placeholder="Type a message" name="message" id="message">
-    <input type="submit" value="send">
+    <input type="submit" value="send" id="send">
   </div>
 </div>
