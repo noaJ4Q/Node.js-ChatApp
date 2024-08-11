@@ -99,23 +99,23 @@ main {
   border-radius: 50%;
 }
 
-#messages .receiver {
+#receiver {
   display: flex;
   justify-content: start;
 }
 
-#messages .receiver .messages {
+#receiver .messages {
   flex: 1;
 }
 
-#messages .receiver .avatar {
+#receiver .avatar {
   grid-row: span 2;
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-#messages .sender .message {
+#sender .message {
   text-align: right;
 }
 

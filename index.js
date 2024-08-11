@@ -26,6 +26,7 @@ const sessionMiddleware = session({
   resave: false,
   store
 });
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(sessionMiddleware);

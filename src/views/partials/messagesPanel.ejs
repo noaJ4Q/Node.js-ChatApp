@@ -7,7 +7,7 @@
     <p>status</p>
   </div>
   <div id="messages">
-    <div class="receiver">
+    <div id="receiver">
       <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/">
       <div class="messages">
         <p class="message">
@@ -21,7 +21,7 @@
         </p>
       </div>
     </div>
-    <div class="sender messages">
+    <div id="sender" class="messages">
       <p class="message">
         <span>message 1</span>
       </p>
@@ -31,7 +31,7 @@
     </div>
   </div>
   <div id="message-box">
-    <input type="hidden" name="user" value="<%= user.sessionID %>" id="receiver">
+    <input type="hidden" name="user" value="<%= user.sessionID %>" id="receiver-data">
     <input type="text" placeholder="Type a message" name="message" id="message">
     <input type="submit" value="send" id="send">
   </div>

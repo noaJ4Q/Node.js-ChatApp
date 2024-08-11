@@ -3,7 +3,6 @@ import { socket } from '/js/scriptsCommon.js';
 const chatRoomsWrapper = document.getElementById('chats-wrapper');
 
 socket.on('reqSocketsID', () => {
-  console.log('req update');
   socket.emit('resSocketID', socket.id);
 });
 
@@ -35,16 +34,16 @@ function renderChatRoom(sessionID, sessionData) {
   chatTime.className = 'time';
   chatTime.textContent = '1h';
 
-  const newChat = document.createElement('div');
-  newChat.className = 'chat';
-  newChat.appendChild(chatPicture);
-  newChat.appendChild(chatName);
-  newChat.appendChild(chatContent);
-  newChat.appendChild(chatTime);
+  const newChatRoom = document.createElement('div');
+  newChatRoom.className = 'chat';
+  newChatRoom.appendChild(chatPicture);
+  newChatRoom.appendChild(chatName);
+  newChatRoom.appendChild(chatContent);
+  newChatRoom.appendChild(chatTime);
 
   const newLinkChat = document.createElement('a');
   newLinkChat.href = `/home/chat/${sessionID}`;
-  newLinkChat.appendChild(newChat);
+  newLinkChat.appendChild(newChatRoom);
 
   chatRoomsWrapper.appendChild(newLinkChat);
 }
