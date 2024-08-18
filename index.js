@@ -3,11 +3,13 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import express from 'express';
 import session from 'express-session';
+import { v4 as uuid } from 'uuid';
 import { Server } from 'socket.io';
 import { createServer } from 'node:http';
 
 import { homeRouter } from './src/routes/homeRoutes.js';
 import { loginRouter } from './src/routes/loginRoutes.js';
+import { GroupChat } from './src/models/GroupChat.js';
 
 // Server setup
 const app = express();
@@ -35,6 +37,8 @@ io.engine.use(sessionMiddleware);
 // Routes
 app.use('/', homeRouter);
 app.use('/', loginRouter);
+
+const GROUPS = [];
 
 // Socket
 io.on('connection', (socket) => {
@@ -66,6 +70,13 @@ io.on('connection', (socket) => {
     const receiverSocketID = socketFiltered.id;
     console.log(`--- message to: ${receiverSessionID} --- socketID: ${receiverSocketID}`);
     io.to(receiverSocketID).emit('message', message);
+  })
+
+  socket.on('create-group', (groupName) => {
+    const newGroup = new GroupChat(uuid(), groupName);
+    console.log(groupName);
+    GROUPS.push(newGroup);
+    io.emit('groups', GROUPS);
   })
 
   socket.on('disconnect', () => {

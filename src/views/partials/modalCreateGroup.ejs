@@ -2,12 +2,12 @@
   <div id="modal-content">
     <div class="modal-header">
       <h2>Create Group</h2>
-      <span class="close">&times;</span>
+      <span id="close-modal" class="close">&times;</span>
     </div>
     <div class="modal-body">
-      <form method="post" action="/home/chat" id="create-group-form">
+      <form id="create-group-form">
         <label for="group-name">Group Name</label>
-        <input type="text" name="group-name" id="group-name" required>
+        <input type="text" name="name" id="name" required>
         <button type="submit">Create group</button>
       </form>
     </div>
