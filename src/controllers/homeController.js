@@ -13,6 +13,10 @@ export class homeController {
     res.status(200).render('chat.ejs', { user: user });
   }
 
+  static showGroups(req, res) {
+    res.status(200).render('groups.ejs');
+  }
+
   static logout(req, res) {
     req.session.destroy(err => {
       if (err) {

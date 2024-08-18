@@ -7,16 +7,26 @@ const receiver = document.getElementById('receiver-data');
 const messagesWrapper = document.getElementById('chat-messages');
 
 sendButton.onclick = () => {
+  sendMessage();
+}
+
+chatInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    sendMessage();
+  }
+})
+
+socket.on('message', (message) => {
+  renderReceiverMessage(message);
+})
+
+function sendMessage() {
   const message = chatInput.value;
   renderSenderMessage(message);
   const receiverSessionID = receiver.value;
   socket.emit('message', { message, receiverSessionID });
   chatInput.value = '';
 }
-
-socket.on('message', (message) => {
-  renderReceiverMessage(message);
-})
 
 function renderSenderMessage(message) {
   const chatContent = document.createElement('p');
