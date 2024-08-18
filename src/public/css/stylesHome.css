@@ -99,27 +99,28 @@ main {
   border-radius: 50%;
 }
 
-#receiver {
+.receiver {
   display: flex;
+  flex-direction: column;
   justify-content: start;
 }
 
-#receiver .messages {
+.receiver .messages {
   flex: 1;
 }
 
-#receiver .avatar {
+.receiver .avatar {
   grid-row: span 2;
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-#sender .message {
+.sender .message {
   text-align: right;
 }
 
-#messages .message span {
+#chat-messages .message {
   color: white;
   background-color: var(--primary-color);
 }

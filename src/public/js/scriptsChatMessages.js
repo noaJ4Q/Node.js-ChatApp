@@ -4,8 +4,7 @@ const chatInput = document.getElementById('message');
 const sendButton = document.getElementById('send');
 const receiver = document.getElementById('receiver-data');
 
-const senderMessagesWrapper = document.getElementById('sender');
-const receiverMessagesWrapper = document.querySelector('#receiver .messages');
+const messagesWrapper = document.getElementById('chat-messages');
 
 sendButton.onclick = () => {
   const message = chatInput.value;
@@ -20,23 +19,25 @@ socket.on('message', (message) => {
 })
 
 function renderSenderMessage(message) {
-  const chatContent = document.createElement('span');
+  const chatContent = document.createElement('p');
+  chatContent.className = 'message';
   chatContent.textContent = message;
 
-  const chatMessage = document.createElement('p');
-  chatMessage.className = 'message';
+  const chatMessage = document.createElement('div');
+  chatMessage.className = 'sender';
   chatMessage.appendChild(chatContent);
 
-  senderMessagesWrapper.appendChild(chatMessage);
+  messagesWrapper.appendChild(chatMessage);
 }
 
 function renderReceiverMessage(message) {
-  const chatContent = document.createElement('span');
+  const chatContent = document.createElement('p');
+  chatContent.className = 'message';
   chatContent.textContent = message;
 
-  const chatMessage = document.createElement('p');
-  chatMessage.className = 'message';
+  const chatMessage = document.createElement('div');
+  chatMessage.className = 'receiver';
   chatMessage.appendChild(chatContent);
 
-  receiverMessagesWrapper.appendChild(chatMessage);
+  messagesWrapper.appendChild(chatMessage);
 }
