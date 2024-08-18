@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group chat</title>
+
+  <link rel="stylesheet" href="/css/stylesHome.css">
+  <script defer type="module" src="/js/scriptsChatGroups.js"></script>
+</head>
+
+<body>
+  <main>
+    <%- include("partials/sidebar.ejs") %>
+      <%- include("partials/groupsPanel.ejs") %>
+        <%- include("partials/messagesPanel.ejs", { title: title, receiverID: receiverID }) %>
+          <%- include('partials/modalCreateGroup.ejs') %>
+  </main>
+</body>
+
+</html>

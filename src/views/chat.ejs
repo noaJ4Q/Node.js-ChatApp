@@ -17,7 +17,7 @@
   <main>
     <%- include('partials/sidebar.ejs') %>
       <%- include('partials/chatsPanel.ejs') %>
-        <%- include('partials/messagesPanel.ejs', user) %>
+        <%- include('partials/messagesPanel.ejs', { title: title, receiverID, receiverID }) %>
   </main>
 </body>
 

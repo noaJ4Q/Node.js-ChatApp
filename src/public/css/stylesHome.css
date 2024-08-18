@@ -55,26 +55,30 @@ main {
   padding: 1.8rem;
 }
 
-#chats-list .chat {
+#chats-list .chat,
+#groups-list .chat {
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: 1fr 1fr
 }
 
-#chats-list .chat:hover {
+#chats-list .chat:hover,
+#groups-list .chat:hover {
   background-color: var(--fourth-color);
   cursor: pointer;
 }
 
-#chats-list .chat .avatar {
+#chats-list .chat .avatar,
+#groups-list .chat .avatar {
   grid-row: span 2;
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-#chats-list .chat .time {
+#chats-list .chat .time,
+#groups-list .chat .time {
   position: absolute;
   top: 0px;
   right: 0px;

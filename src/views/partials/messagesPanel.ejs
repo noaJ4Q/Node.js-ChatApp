@@ -2,7 +2,7 @@
   <div class="title">
     <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/">
     <h2>
-      <%= user.name + ' ' + user.lastName %>
+      <%= title %>
     </h2>
     <p>status</p>
   </div>
@@ -26,7 +26,7 @@
     </div>
   </div>
   <div id="message-box">
-    <input type="hidden" name="user" value="<%= user.sessionID %>" id="receiver-data">
+    <input type="hidden" name="user" value="<%= receiverID %>" id="receiver-data">
     <input type="text" placeholder="Type a message" name="message" id="message">
     <input type="submit" value="send" id="send">
   </div>

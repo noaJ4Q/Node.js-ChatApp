@@ -38,7 +38,7 @@ io.engine.use(sessionMiddleware);
 app.use('/', homeRouter);
 app.use('/', loginRouter);
 
-const GROUPS = [];
+export const GROUPS = [];
 
 // Socket
 io.on('connection', (socket) => {
@@ -72,9 +72,12 @@ io.on('connection', (socket) => {
     io.to(receiverSocketID).emit('message', message);
   })
 
+  socket.on('reqGroups', () => {
+    io.emit('groups', GROUPS);
+  });
+
   socket.on('create-group', (groupName) => {
     const newGroup = new GroupChat(uuid(), groupName);
-    console.log(groupName);
     GROUPS.push(newGroup);
     io.emit('groups', GROUPS);
   })
