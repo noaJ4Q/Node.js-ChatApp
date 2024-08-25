@@ -7,13 +7,14 @@
   <title>Login</title>
 
   <link rel="stylesheet" href="css/stylesLogin.css">
+  <link rel="stylesheet" href="/css/tailwind.css">
 </head>
 
 <body>
-  <main>
-    <div id="welcome-card">
+  <main class="h-screen flex items-center justify-center">
+    <div id="welcome-card" class="p-8 rounded-3xl bg-white">
       <h1>Welcome to </br>chat application</h1>
-      <form method="post" action="/login" id="welcome-form">
+      <form method="post" action="/login" id="welcome-form" class="flex flex-col w-full gap-4">
         <input type="text" placeholder="Name" name="name" id="name">
         <input type="text" placeholder="Last name" name="lastName" id="last-name">
         <section id="remember-me">
