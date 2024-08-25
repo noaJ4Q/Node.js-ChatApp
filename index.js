@@ -87,7 +87,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('groupMessage', ({ message, groupReceiverID }) => {
-    io.to(groupReceiverID).emit('groupMessage', message);
+    socket.broadcast.to(groupReceiverID).emit('groupMessage', message);
   })
 
   socket.on('disconnect', () => {
