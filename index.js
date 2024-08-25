@@ -82,6 +82,14 @@ io.on('connection', (socket) => {
     io.emit('groups', GROUPS);
   })
 
+  socket.on('joinGroupChat', (groupID) => {
+    socket.join(groupID);
+  });
+
+  socket.on('groupMessage', ({ message, groupReceiverID }) => {
+    io.to(groupReceiverID).emit('groupMessage', message);
+  })
+
   socket.on('disconnect', () => {
     io.emit('reqSocketsID');
     console.log('disconnected: ' + socket.id);
