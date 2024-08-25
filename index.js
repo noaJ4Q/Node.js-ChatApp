@@ -49,6 +49,8 @@ io.on('connection', (socket) => {
   // Receiving socket ID from each client
   socket.on('resSocketID', async (socketID) => {
 
+    // TODO: CONSIDERE REFACTORIZE USE OF socketID WITH socket.id
+
     // get socket object based on socketID to get session object
     const sockets = await io.fetchSockets();
     const socketFiltered = sockets.find(s => s.id === socketID);
@@ -86,8 +88,12 @@ io.on('connection', (socket) => {
     socket.join(groupID);
   });
 
-  socket.on('groupMessage', ({ message, groupReceiverID }) => {
-    socket.broadcast.to(groupReceiverID).emit('groupMessage', message);
+  socket.on('groupMessage', async ({ message, groupReceiverID }) => {
+    const senderSocketId = socket.id;
+    const sockets = await io.fetchSockets();
+    const senderSocket = sockets.find(s => s.id === senderSocketId);
+
+    socket.broadcast.to(groupReceiverID).emit('groupMessage', { message: message, sender: senderSocket.request.session.user });
   })
 
   socket.on('disconnect', () => {

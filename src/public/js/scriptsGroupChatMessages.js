@@ -8,8 +8,8 @@ const messagesWrapper = document.getElementById('chat-messages');
 
 socket.emit('joinGroupChat', receiver.value);
 
-socket.on('groupMessage', (message) => {
-  renderReceiverGroupMessage(message);
+socket.on('groupMessage', ({ message, sender }) => {
+  renderReceiverGroupMessage(message, sender);
 })
 
 sendButton.onclick = () => {
@@ -42,8 +42,9 @@ function renderSenderGroupMessage(message) {
   messagesWrapper.appendChild(chatMessage);
 }
 
-function renderReceiverGroupMessage(message) {
+function renderReceiverGroupMessage(message, sender) {
   console.log(message);
+  console.log(sender);
   const chatContent = document.createElement('p');
   chatContent.className = 'message';
   chatContent.textContent = message;
