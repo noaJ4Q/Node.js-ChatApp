@@ -10,18 +10,22 @@
   <link rel="stylesheet" href="/css/tailwind.css">
 </head>
 
-<body>
+<body class="bg-slate-100">
   <main class="h-screen flex items-center justify-center">
     <div id="welcome-card" class="p-8 rounded-3xl bg-white">
-      <h1>Welcome to </br>chat application</h1>
-      <form method="post" action="/login" id="welcome-form" class="flex flex-col w-full gap-4">
-        <input type="text" placeholder="Name" name="name" id="name">
-        <input type="text" placeholder="Last name" name="lastName" id="last-name">
+      <h1 class="text-lg pb-6">Welcome to </br><span class="text-3xl text-indigo-500 font-black">Chat
+          application</span></h1>
+      <form method="post" action="/login" id="welcome-form" class="flex flex-col w-full gap-4 text-sm">
+        <input type="text" placeholder="Name" name="name" id="name"
+          class="border-2 border-slate-200 rounded-lg p-3 outline-none">
+        <input type="text" placeholder="Last name" name="lastName" id="last-name"
+          class="border-2 border-slate-200 rounded-lg p-3 outline-none">
         <section id="remember-me">
           <input type="checkbox" name="rememberMe" id="remember">
           <label for="remember">Remember me</label>
         </section>
-        <input type="submit" value="Start chat">
+        <input type="submit" value="Start chat"
+          class="text-sm text-white p-4 rounded-lg bg-indigo-500 hover:cursor-pointer hover:bg-indigo-600 duration-300">
       </form>
     </div>
   </main>
