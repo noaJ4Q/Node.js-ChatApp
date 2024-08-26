@@ -4,21 +4,21 @@ import { GROUPS } from '../../index.js';
 export class homeController {
 
   static showPage(req, res) {
-    res.status(200).render('home.ejs');
+    res.status(200).render('userHome.ejs');
   }
 
   static showChat(req, res) {
     const { sessionID } = req.params;
     const user = JSON.parse(store.sessions[sessionID]).user;
     user.sessionID = sessionID;
-    res.status(200).render('chat.ejs', {
+    res.status(200).render('userChat.ejs', {
       title: `${user.name} ${user.lastName}`,
       receiverID: user.sessionID
     });
   }
 
   static showGroups(req, res) {
-    res.status(200).render('groups.ejs');
+    res.status(200).render('groupsHome.ejs');
   }
 
   static showGroupChat(req, res) {

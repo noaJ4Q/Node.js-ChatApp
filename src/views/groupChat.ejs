@@ -6,15 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Group chat</title>
 
-  <link rel="stylesheet" href="/css/stylesHome.css">
-  <script defer type="module" src="/js/scriptsChatGroups.js"></script>
-  <script defer type="module" src="/js/scriptsGroupChatMessages.js"></script>
+  <link rel="stylesheet" href="/css/homeStyles.css">
+  <script defer type="module" src="/js/groupListScripts.js"></script>
+  <script defer type="module" src="/js/groupChatMessagesScripts.js"></script>
 </head>
 
 <body>
   <main>
-    <%- include("partials/sidebar.ejs") %>
-      <%- include("partials/groupsPanel.ejs") %>
+    <%- include("partials/sidebarPanel.ejs") %>
+      <%- include("partials/groupListPanel.ejs") %>
         <%- include("partials/messagesPanel.ejs", { title: title, receiverID: receiverID }) %>
           <%- include('partials/modalCreateGroup.ejs') %>
   </main>

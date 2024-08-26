@@ -1,4 +1,4 @@
-import { socket } from '/js/scriptsCommon.js';
+import { socket } from '/js/commonScripts.js';
 
 const modal = document.getElementById('create-group-modal');
 const openModalButton = document.getElementById('create-group');

@@ -1,4 +1,4 @@
-import { socket } from '/js/scriptsCommon.js';
+import { socket } from '/js/commonScripts.js';
 
 const chatInput = document.getElementById('message');
 const sendButton = document.getElementById('send');
@@ -6,31 +6,29 @@ const receiver = document.getElementById('receiver-data');
 
 const messagesWrapper = document.getElementById('chat-messages');
 
-socket.emit('joinGroupChat', receiver.value);
-
-socket.on('groupMessage', ({ message, sender }) => {
-  renderReceiverGroupMessage(message, sender);
-})
-
 sendButton.onclick = () => {
-  sendGroupMessage();
+  sendMessage();
 }
 
 chatInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') {
-    sendGroupMessage();
+    sendMessage();
   }
 })
 
-function sendGroupMessage() {
+socket.on('message', (message) => {
+  renderReceiverMessage(message);
+})
+
+function sendMessage() {
   const message = chatInput.value;
-  renderSenderGroupMessage(message);
-  const groupReceiverID = receiver.value;
-  socket.emit('groupMessage', { message, groupReceiverID });
+  renderSenderMessage(message);
+  const receiverSessionID = receiver.value;
+  socket.emit('message', { message, receiverSessionID });
   chatInput.value = '';
 }
 
-function renderSenderGroupMessage(message) {
+function renderSenderMessage(message) {
   const chatContent = document.createElement('p');
   chatContent.className = 'message';
   chatContent.textContent = message;
@@ -42,9 +40,7 @@ function renderSenderGroupMessage(message) {
   messagesWrapper.appendChild(chatMessage);
 }
 
-function renderReceiverGroupMessage(message, sender) {
-  console.log(message);
-  console.log(sender);
+function renderReceiverMessage(message) {
   const chatContent = document.createElement('p');
   chatContent.className = 'message';
   chatContent.textContent = message;

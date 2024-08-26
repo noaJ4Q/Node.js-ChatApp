@@ -1,4 +1,4 @@
-import { socket } from '/js/scriptsCommon.js';
+import { socket } from '/js/commonScripts.js';
 
 const chatRoomsWrapper = document.getElementById('chats-wrapper');
 
