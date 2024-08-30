@@ -30,7 +30,7 @@ function sendMessage() {
 
 function renderSenderMessage(message) {
   const chatContent = document.createElement('p');
-  chatContent.className = 'message';
+  chatContent.className = 'message w-fit ml-auto mr-0 bg-indigo-600 rounded-lg px-3 py-2 my-2 text-white';
   chatContent.textContent = message;
 
   const chatMessage = document.createElement('div');
@@ -42,7 +42,7 @@ function renderSenderMessage(message) {
 
 function renderReceiverMessage(message) {
   const chatContent = document.createElement('p');
-  chatContent.className = 'message';
+  chatContent.className = 'message w-fit ml-0 mr-auto bg-gray-200 rounded-lg px-3 py-2 my-2 text-black';
   chatContent.textContent = message;
 
   const chatMessage = document.createElement('div');

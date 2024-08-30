@@ -38,23 +38,23 @@ function renderGroup(group) {
   chatPicture.className = 'avatar';
 
   const chatName = document.createElement('h3');
-  chatName.className = 'name';
+  chatName.className = 'name font-semibold text-base';
   chatName.textContent = `${group.name}`;
 
-  const chatContent = document.createElement('p');
-  chatContent.className = 'preview';
-  chatContent.textContent = 'chat content';
-
   const chatTime = document.createElement('p');
-  chatTime.className = 'time';
+  chatTime.className = 'time text-slate-400 font-semibold';
   chatTime.textContent = '1h';
 
+  const chatContent = document.createElement('p');
+  chatContent.className = 'preview text-slate-500';
+  chatContent.textContent = 'chat content';
+
   const newChatRoom = document.createElement('div');
-  newChatRoom.className = 'chat';
+  newChatRoom.className = 'chat p-3 rounded-lg hover:bg-indigo-100 duration-300';
   newChatRoom.appendChild(chatPicture);
   newChatRoom.appendChild(chatName);
-  newChatRoom.appendChild(chatContent);
   newChatRoom.appendChild(chatTime);
+  newChatRoom.appendChild(chatContent);
 
   const newLinkChat = document.createElement('a');
   newLinkChat.href = `/home/groups/${group.id}`;

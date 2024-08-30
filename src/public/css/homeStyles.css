@@ -13,9 +13,6 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  /*background-color: var(--secondary-color);*/
-  background-color: gray;
-  min-height: 100vh;
 }
 
 main {
@@ -31,26 +28,11 @@ main {
   flex-direction: column;
   justify-content: start;
   gap: 1rem;
-  padding: .5rem;
-  background-color: white;
   margin-right: 2rem;
 }
 
 /*-----------------------------*/
 
-#chats-panel,
-#groups-panel {
-  background-color: white;
-  border-right: 3px solid var(--third-color);
-}
-
-#chats-panel .title,
-#groups-panel .title {
-  padding: 1.8rem;
-  border-bottom: 3px solid var(--third-color);
-}
-
-#chats-list,
 #groups-list {
   padding: 1.8rem;
 }
@@ -59,11 +41,11 @@ main {
 #groups-list .chat {
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: 1fr 1fr
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1fr 1fr;
+  column-gap: .75rem;
 }
 
-#chats-list .chat:hover,
 #groups-list .chat:hover {
   background-color: var(--fourth-color);
   cursor: pointer;
@@ -77,11 +59,8 @@ main {
   border-radius: 50%;
 }
 
-#chats-list .chat .time,
-#groups-list .chat .time {
-  position: absolute;
-  top: 0px;
-  right: 0px;
+.preview {
+  grid-column: span 2;
 }
 
 /*-----------------------------*/
@@ -89,14 +68,13 @@ main {
 #messages-panel {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  background-color: white;
 }
 
 #messages-panel .title {
   display: grid;
   grid-template-columns: auto 1fr;
   grid-template-rows: 1fr 1fr;
-  border-bottom: 3px solid var(--third-color);
+  column-gap: .75rem;
 }
 
 #messages-panel .title .avatar {
@@ -104,12 +82,6 @@ main {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-}
-
-.receiver {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
 }
 
 .receiver .messages {
@@ -123,27 +95,8 @@ main {
   border-radius: 50%;
 }
 
-.sender .message {
-  text-align: right;
-}
-
-#chat-messages .message {
-  color: white;
-  background-color: var(--primary-color);
-}
-
-#message-box {
-  display: flex;
-  gap: 1rem;
-  padding: 1.6rem 1.2rem;
-}
-
 #message-box input[type="text"] {
   flex: 1;
-  padding: .5rem;
-  border: 3px solid var(--third-color);
-  border-radius: 5px;
-  outline: none;
 }
 
 /*-----------------------------*/

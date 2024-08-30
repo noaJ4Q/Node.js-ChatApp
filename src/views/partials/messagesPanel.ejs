@@ -1,33 +1,30 @@
-<div id="messages-panel">
-  <div class="title">
+<div id="messages-panel" class="bg-white">
+  <div class="title p-4 border-b-2 border-slate-100">
     <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/">
-    <h2>
+    <h2 class="font-semibold text-xl">
       <%= title %>
     </h2>
-    <p>status</p>
+    <p class="text-sm">status</p>
   </div>
-  <div id="chat-messages">
+  <div id="chat-messages" class="text-sm px-4">
     <div class="receiver">
       <!-- <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/"> -->
-      <p class="message">
+      <p class="message w-fit ml-0 mr-auto bg-gray-200 rounded-lg px-3 py-2 my-2 text-black">
         message 1
-      </p>
-      <p class="message">
-        message 2
       </p>
     </div>
     <div class="sender">
-      <p class="message">
+      <p class="message w-fit ml-auto mr-0 bg-indigo-600 rounded-lg px-3 py-2 my-2 text-white">
         message 1
-      </p>
-      <p class="message">
-        message 2
       </p>
     </div>
   </div>
-  <div id="message-box">
+  <div id="message-box" class="flex gap-4 p-4">
     <input type="hidden" name="user" value="<%= receiverID %>" id="receiver-data">
-    <input type="text" placeholder="Type a message" name="message" id="message">
-    <input type="submit" value="send" id="send">
+    <input type="text" placeholder="Type a message" name="message" id="message"
+      class="text-sm outline-none border-2 border-slate-200 p-3 rounded-md">
+    <button type="submit" id="send">
+      <i class="fa-solid fa-paper-plane"></i>
+    </button>
   </div>
 </div>
