@@ -35,7 +35,7 @@ function renderChatRoom(sessionID, sessionData) {
   chatContent.textContent = 'chat content';
 
   const newChatRoom = document.createElement('div');
-  newChatRoom.className = 'chat p-3 rounded-lg hover:bg-indigo-100 duration-300';
+  newChatRoom.className = 'chat p-3 rounded-lg hover:bg-indigo-50 duration-300';
   newChatRoom.appendChild(chatPicture);
   newChatRoom.appendChild(chatName);
   newChatRoom.appendChild(chatTime);

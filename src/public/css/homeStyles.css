@@ -33,10 +33,6 @@ main {
 
 /*-----------------------------*/
 
-#groups-list {
-  padding: 1.8rem;
-}
-
 #chats-list .chat,
 #groups-list .chat {
   position: relative;
@@ -44,11 +40,6 @@ main {
   grid-template-columns: auto 1fr auto;
   grid-template-rows: 1fr 1fr;
   column-gap: .75rem;
-}
-
-#groups-list .chat:hover {
-  background-color: var(--fourth-color);
-  cursor: pointer;
 }
 
 #chats-list .chat .avatar,
@@ -120,10 +111,4 @@ main {
   display: none;
   align-items: center;
   justify-content: center;
-}
-
-#modal-content {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 10px;
 }
