@@ -18,7 +18,7 @@ export class homeController {
   }
 
   static showGroups(req, res) {
-    res.status(200).render('groupsHome.ejs');
+    res.status(200).render('groupHome.ejs');
   }
 
   static showGroupChat(req, res) {

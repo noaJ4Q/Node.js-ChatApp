@@ -3,7 +3,7 @@ import { socket } from '/js/commonScripts.js';
 const chatRoomsWrapper = document.getElementById('chats-wrapper');
 
 socket.on('reqSocketsID', () => {
-  socket.emit('resSocketID', socket.id);
+  socket.emit('resSocketID');
 });
 
 socket.on('chatRooms', (data) => {
