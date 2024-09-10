@@ -12,7 +12,6 @@ import { loginRouter } from './src/routes/loginRoutes.js';
 // Server setup
 const app = express();
 const http = createServer(app);
-// const io = new Server(http);
 export const store = new session.MemoryStore();
 const PORT = process.env.PORT || 8080;
 const SESSION_SECRET = process.env.SESSION_SECRET;
