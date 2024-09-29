@@ -14,20 +14,20 @@ export function socketService(httpServer) {
   io.on('connection', (socket) => {
     console.log(`new connection ${socket.id}`);
 
-    io.emit('reqSocketsID');
+    const socketUsers = [];
+    for (let [id, socket] of io.of('/').sockets) {
+      socketUsers.push({
+        userId: id,
+        user: socket.request.session.user
+      })
+    }
 
-    // Receiving socket ID from each client
-    socket.on('resSocketID', async () => {
+    socket.emit("user list", socketUsers);
 
-      const sockets = await io.fetchSockets();
-      const socketFiltered = sockets.find(s => s.id === socket.id);
-      const sessionID = socketFiltered.request.session.id;
-      const chatRoomsPerUser = filterChats(store.sessions, sessionID);
-
-      // io.to(socket.id).emit('chatRooms', chatRoomsPerUser);
-      io.to(socket.id).emit("chatRooms", USERS);
-
-    });
+    socket.broadcast.emit("user connected", {
+      userId: socket.id,
+      user: socket.request.session.user
+    })
 
     socket.on('userMessage', async ({ message, receiverSessionID }) => {
       const sockets = await io.fetchSockets();

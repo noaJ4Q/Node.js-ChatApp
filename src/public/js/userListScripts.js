@@ -2,40 +2,18 @@ import { socket } from '/js/commonScripts.js';
 
 const chatRoomsWrapper = document.getElementById('chats-wrapper');
 
-export function handleUserList(userId) {
-  socket.on("reqSocketsID", () => {
-    socket.emit("resSocketID");
-  });
-
-  socket.on("chatRooms", (userList) => {
-    chatRoomsWrapper.innerHTML = "";
-    for (const user of userList) {
-      if (user.id !== userId) {
-        renderChatRoom(user);
-      }
-    }
-    // for (const sessionID in data) {
-    // const sessionData = JSON.parse(data[sessionID]);
-    // renderChatRoom(sessionID, sessionData);
-    // }
+socket.on("user list", (users) => {
+  chatRoomsWrapper.innerHTML = '';
+  users.forEach(user => {
+    user.self = user.userId === socket.id;
+    console.log(user);
   })
 
-}
-
-// socket.on('reqSocketsID', () => {
-//   socket.emit('resSocketID');
-// });
-
-// socket.on('chatRooms', (users) => {
-//   chatRoomsWrapper.innerHTML = '';
-//   for (const user of users) {
-//     renderChatRoom(user);
-//   }
-//   // for (const sessionID in data) {
-//   // const sessionData = JSON.parse(data[sessionID]);
-//   // renderChatRoom(sessionID, sessionData);
-//   // }
-// });
+  // for (const sessionID in data) {
+  // const sessionData = JSON.parse(data[sessionID]);
+  // renderChatRoom(sessionID, sessionData);
+  // }
+});
 
 function renderChatRoom(user) {
   // const { name, lastName } = sessionData.user;
