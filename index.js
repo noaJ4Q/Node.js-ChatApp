@@ -42,3 +42,8 @@ export const GROUPS = [];
 http.listen(PORT, () => {
   console.log('Server running on http://localhost:' + PORT);
 });
+
+// TODO:
+// - Add background messages feature
+// - Add POO approach
+// - Fix render method of messages for sender (should render based on logued user)

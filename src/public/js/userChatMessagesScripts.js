@@ -16,7 +16,7 @@ chatInput.addEventListener('keydown', (e) => {
   }
 })
 
-socket.on('message', (message) => {
+socket.on('userMessage', (message) => {
   renderReceiverMessage(message);
 })
 
@@ -24,7 +24,7 @@ function sendMessage() {
   const message = chatInput.value;
   renderSenderMessage(message);
   const receiverSessionID = receiver.value;
-  socket.emit('message', { message, receiverSessionID });
+  socket.emit('userMessage', { message, receiverSessionID });
   chatInput.value = '';
 }
 

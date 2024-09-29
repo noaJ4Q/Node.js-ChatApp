@@ -1,10 +1,14 @@
 import { store } from '../../index.js';
 import { GROUPS } from '../../index.js';
 
+export const USERS = [];
+
 export class homeController {
 
   static showPage(req, res) {
-    res.status(200).render('userHome.ejs');
+    res.status(200).render('userHome.ejs', {
+      user: req.session.user
+    });
   }
 
   static showChat(req, res) {
