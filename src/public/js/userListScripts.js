@@ -5,20 +5,19 @@ const chatRoomsWrapper = document.getElementById('chats-wrapper');
 socket.on("user list", (users) => {
   chatRoomsWrapper.innerHTML = '';
   users.forEach(user => {
-    user.self = user.userId === socket.id;
-    console.log(user);
+    if (user.userId !== socket.id) {
+      renderChatRoom(user);
+    }
   })
-
-  // for (const sessionID in data) {
-  // const sessionData = JSON.parse(data[sessionID]);
-  // renderChatRoom(sessionID, sessionData);
-  // }
 });
 
+socket.on("user connected", (user) => {
+  console.log("new user connected", user);
+})
+
 function renderChatRoom(user) {
-  // const { name, lastName } = sessionData.user;
-  const name = user.name;
-  const lastName = user.lastName;
+  const name = user.userContent.name;
+  const lastName = user.userContent.lastName;
 
   const chatPicture = document.createElement('img');
   chatPicture.src = 'https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg';
@@ -45,7 +44,7 @@ function renderChatRoom(user) {
   newChatRoom.appendChild(chatContent);
 
   const newLinkChat = document.createElement('a');
-  newLinkChat.href = `/home/chat/${user.id}`;
+  newLinkChat.href = `/home/chat/${user.userId}`;
   newLinkChat.className = '';
   newLinkChat.appendChild(newChatRoom);
 

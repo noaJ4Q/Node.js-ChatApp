@@ -37,8 +37,6 @@ app.use(sessionMiddleware);
 app.use('/', homeRouter);
 app.use('/', loginRouter);
 
-export const GROUPS = [];
-
 http.listen(PORT, () => {
   console.log('Server running on http://localhost:' + PORT);
 });

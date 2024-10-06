@@ -1,12 +1,16 @@
 import { socket } from '/js/commonScripts.js';
 
+const messagesWrapper = document.getElementById('chat-messages');
 const chatInput = document.getElementById('message');
 const sendButton = document.getElementById('send');
 const receiver = document.getElementById('receiver-data');
 
-const messagesWrapper = document.getElementById('chat-messages');
+socket.on("private message", ({ message, from }) => {
+  renderReceiverMessage(message);
+})
 
 sendButton.onclick = () => {
+  console.log('send button clicked');
   sendMessage();
 }
 
@@ -16,15 +20,11 @@ chatInput.addEventListener('keydown', (e) => {
   }
 })
 
-socket.on('userMessage', (message) => {
-  renderReceiverMessage(message);
-})
-
 function sendMessage() {
   const message = chatInput.value;
+  const socketId = receiver.value;
+  socket.emit("private message", { message, to: socketId });
   renderSenderMessage(message);
-  const receiverSessionID = receiver.value;
-  socket.emit('userMessage', { message, receiverSessionID });
   chatInput.value = '';
 }
 
@@ -41,6 +41,7 @@ function renderSenderMessage(message) {
 }
 
 function renderReceiverMessage(message) {
+  console.log('rendering receiver message');
   const chatContent = document.createElement('p');
   chatContent.className = 'message w-fit ml-0 mr-auto bg-gray-200 rounded-lg px-3 py-2 my-2 text-black';
   chatContent.textContent = message;

@@ -1,34 +1,35 @@
 import { store } from '../../index.js';
-import { GROUPS } from '../../index.js';
-
-export const USERS = [];
 
 export class homeController {
 
   static showPage(req, res) {
     res.status(200).render('userHome.ejs', {
+      sidebar: 1,
       user: req.session.user
     });
   }
 
   static showChat(req, res) {
-    const { sessionID } = req.params;
-    const user = JSON.parse(store.sessions[sessionID]).user;
-    user.sessionID = sessionID;
+    const { socketId } = req.params;
     res.status(200).render('userChat.ejs', {
-      title: `${user.name} ${user.lastName}`,
-      receiverID: user.sessionID
+      sidebar: 1,
+      receiverID: socketId
     });
   }
 
   static showGroups(req, res) {
-    res.status(200).render('groupHome.ejs');
+    res.status(200).render('groupHome.ejs', {
+      sidebar: 2
+    });
   }
 
   static showGroupChat(req, res) {
     const { groupID } = req.params;
     const group = GROUPS.find(g => g.id === groupID);
-    res.status(200).render('groupChat.ejs', { title: group.name, receiverID: group.id });
+    res.status(200).render('groupChat.ejs', {
+      sidebar: 2,
+      title: group.name, receiverID: group.id
+    });
   }
 
   static logout(req, res) {

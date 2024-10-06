@@ -1,5 +1,8 @@
-<section id="sidebar" class="p-4 bg-white shadow-md">
-  <a href="/home"><i class="fa-regular fa-message"></i></a>
-  <a href="/home/groups"><i class="fa-solid fa-users"></i></a>
-  <a href="/home/logout"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+<section id="sidebar" class="p-4 mr-8 bg-white shadow-md flex flex-col justify-start gap-6">
+  <a href="/home"><i class="fa-solid fa-message fa-lg <%= sidebar == 1 ? " text-indigo-500"
+      : "hover:text-indigo-500 duration-300" %> "></i></a>
+  <a href="/home/groups"><i class="fa-solid fa-users fa-lg <%= sidebar == 2 ? " text-indigo-500"
+      : "hover:text-indigo-500 duration-300" %> "></i></a>
+  <a href="/home/logout"><i
+      class="fa-solid fa-arrow-right-from-bracket fa-lg hover:text-indigo-500 duration-300"></i></a>
 </section>
