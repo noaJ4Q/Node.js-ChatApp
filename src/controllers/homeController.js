@@ -8,10 +8,10 @@ export class homeController {
   }
 
   static showChat(req, res) {
-    const { socketId } = req.params;
+    const { userId } = req.params;
     res.status(200).render('userChat.ejs', {
       sidebar: 1,
-      receiverID: socketId
+      receiverId: userId
     });
   }
 

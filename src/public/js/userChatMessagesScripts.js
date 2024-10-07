@@ -5,7 +5,7 @@ const chatInput = document.getElementById('message');
 const sendButton = document.getElementById('send');
 const receiver = document.getElementById('receiver-data');
 
-socket.on("private message", ({ message, from }) => {
+socket.on("private message", ({ message, from, to }) => {
   renderReceiverMessage(message);
 })
 
@@ -22,8 +22,8 @@ chatInput.addEventListener('keydown', (e) => {
 
 function sendMessage() {
   const message = chatInput.value;
-  const socketId = receiver.value;
-  socket.emit("private message", { message, to: socketId });
+  const userId = receiver.value;
+  socket.emit("private message", { message, to: userId });
   renderSenderMessage(message);
   chatInput.value = '';
 }

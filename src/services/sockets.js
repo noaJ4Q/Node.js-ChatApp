@@ -31,9 +31,15 @@ export function socketService(httpServer) {
     })
 
     socket.on("private message", ({ message, to }) => {
+      // send to other tabs of sender
+      // io.to(to).to(socket.request.session.user.id).emit("private message", {
+      //   message,
+      //   from: socket.request.session.user.id
+      // })
       io.to(to).emit("private message", {
         message,
-        from: socket.id
+        from: socket.request.session.user.id,
+        to
       })
     })
 

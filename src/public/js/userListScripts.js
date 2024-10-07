@@ -48,7 +48,7 @@ function renderChatRoom(user) {
   newChatRoom.appendChild(chatContent);
 
   const newLinkChat = document.createElement('a');
-  newLinkChat.href = `/home/chat/${user.userId}`;
+  newLinkChat.href = `/home/chat/${user.id}`;
   newLinkChat.className = '';
   newLinkChat.appendChild(newChatRoom);
 
