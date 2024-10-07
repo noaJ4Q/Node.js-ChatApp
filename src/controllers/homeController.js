@@ -1,5 +1,3 @@
-import { store } from '../../index.js';
-
 export class homeController {
 
   static showPage(req, res) {

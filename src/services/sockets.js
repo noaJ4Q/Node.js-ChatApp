@@ -1,9 +1,7 @@
 import { Server } from 'socket.io';
 import { v4 as uuid } from 'uuid';
 import { sessionMiddleware } from '../../index.js';
-import { store } from '../../index.js';
-import { GroupChat } from '../models/GroupChat.js';
-import { Message } from '../models/Message.js';
+import { store } from "../../index.js";
 
 export function socketService(httpServer) {
   const io = new Server(httpServer);
@@ -12,18 +10,23 @@ export function socketService(httpServer) {
   io.on('connection', (socket) => {
     console.log(`new connection ${socket.id}`);
 
-    const socketUsers = [];
-    for (let [id, socket] of io.of('/').sockets) {
-      socketUsers.push({
-        userId: id,
-        userContent: socket.request.session.user
-      })
-    }
+    socket.emit("session", {
+      userId: socket.request.session.user.id
+    })
 
-    socket.emit("user list", socketUsers);
+    socket.join(socket.request.session.user.id);
+
+    const users = [];
+    store.all((err, sessions) => {
+      if (err) console.error(err);
+      for (const sessionId in sessions) {
+        const session = sessions[sessionId];
+        users.push(session.user);
+      }
+      socket.emit("user list", users);
+    })
 
     socket.broadcast.emit("user connected", {
-      userId: socket.id,
       user: socket.request.session.user
     })
 

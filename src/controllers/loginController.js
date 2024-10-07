@@ -8,7 +8,8 @@ export class loginController {
 
   static login(req, res) {
     const { name, lastName, rememberMe } = req.body;
-    req.session.user = 1;
+    const newUser = new User(uuid(), name, lastName, "", true);
+    req.session.user = newUser;
 
     if (rememberMe) {
       req.session.cookie.maxAge = 60 * 60 * 24 * 1000; // 24 hours      

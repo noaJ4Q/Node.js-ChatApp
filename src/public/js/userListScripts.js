@@ -2,10 +2,14 @@ import { socket } from '/js/commonScripts.js';
 
 const chatRoomsWrapper = document.getElementById('chats-wrapper');
 
+socket.on("session", ({ userId }) => {
+  socket.userId = userId;
+})
+
 socket.on("user list", (users) => {
   chatRoomsWrapper.innerHTML = '';
   users.forEach(user => {
-    if (user.userId !== socket.id) {
+    if (user.id !== socket.userId) {
       renderChatRoom(user);
     }
   })
@@ -16,8 +20,8 @@ socket.on("user connected", (user) => {
 })
 
 function renderChatRoom(user) {
-  const name = user.userContent.name;
-  const lastName = user.userContent.lastName;
+  const name = user.name;
+  const lastName = user.lastName;
 
   const chatPicture = document.createElement('img');
   chatPicture.src = 'https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg';
