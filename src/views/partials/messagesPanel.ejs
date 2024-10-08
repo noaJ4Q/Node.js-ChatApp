@@ -2,9 +2,14 @@
   <div class="title p-4 border-b-2 border-slate-100">
     <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/">
     <h2 class="font-semibold text-xl">
-      Name
+      <%= receiver.name %>
+        <%= receiver.lastName %>
     </h2>
-    <p class="text-sm">status</p>
+    <p class="text-sm text-slate-500">
+      <span class="inline-block w-2.5 h-2.5 <%= receiver.connected ? " bg-green-500" : "bg-red-500" %> rounded-full
+        mr-1"></span>
+      <%= receiver.connected ? "online" : "offline" %>
+    </p>
   </div>
   <div id="chat-messages" class="text-sm px-4">
     <!-- <div class="receiver">
@@ -20,11 +25,11 @@
     </div> -->
   </div>
   <div id="message-box" class="flex gap-4 p-4">
-    <input type="hidden" name="user" value="<%= receiverId %>" id="receiver-data">
+    <input type="hidden" name="user" value="<%= receiver.id %>" id="receiver-data">
     <input type="text" placeholder="Type a message" name="message" id="message"
       class="text-sm outline-none border-2 border-slate-200 p-3 rounded-md">
     <button type="submit" id="send">
-      <i class="fa-solid fa-paper-plane"></i>
+      <i class="fa-solid fa-lg fa-paper-plane"></i>
     </button>
   </div>
 </div>

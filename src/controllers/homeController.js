@@ -9,10 +9,20 @@ export class homeController {
 
   static showChat(req, res) {
     const { userId } = req.params;
-    res.status(200).render('userChat.ejs', {
-      sidebar: 1,
-      receiverId: userId
-    });
+    for (const session in req.sessionStore.sessions) {
+      const sessionData = JSON.parse(req.sessionStore.sessions[session]);
+      if (sessionData.user.id === userId) {
+        return res.status(200).render('userChat.ejs', {
+          sidebar: 1,
+          receiver: sessionData.user
+        });
+      }
+    }
+
+    // res.status(200).render('userChat.ejs', {
+    //   sidebar: 1,
+    //   receiverId: userId
+    // });
   }
 
   static showGroups(req, res) {

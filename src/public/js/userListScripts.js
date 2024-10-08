@@ -15,8 +15,11 @@ socket.on("user list", (users) => {
   })
 });
 
-socket.on("user connected", (user) => {
-  console.log("new user connected", user);
+socket.on("user connected", ({ user }) => {
+  const chatIds = getRenderedChats();
+  if (!chatIds.includes(user.id)) {
+    renderChatRoom(user);
+  }
 })
 
 function renderChatRoom(user) {
@@ -53,4 +56,11 @@ function renderChatRoom(user) {
   newLinkChat.appendChild(newChatRoom);
 
   chatRoomsWrapper.appendChild(newLinkChat);
+}
+
+function getRenderedChats() {
+  return Array.from(chatRoomsWrapper.querySelectorAll("a"))
+    .map(anchor => {
+      return anchor.getAttribute("href").split("/").pop();
+    })
 }
