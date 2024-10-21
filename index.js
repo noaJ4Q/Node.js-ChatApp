@@ -12,6 +12,7 @@ import { loginRouter } from './src/routes/loginRoutes.js';
 // Server setup
 const app = express();
 const http = createServer(app);
+
 export const store = new session.MemoryStore();
 const PORT = process.env.PORT || 8080;
 const SESSION_SECRET = process.env.SESSION_SECRET;
@@ -21,14 +22,14 @@ app.set('views', path.join(process.cwd(), 'src/views'));
 app.use(express.static(path.join(process.cwd(), 'src/public')));
 
 // Middleware
-export const sessionMiddleware = session({
+const sessionMiddleware = session({
   secret: SESSION_SECRET, // go bati
   saveUninitialized: false,
   resave: false,
   store
 });
 
-socketService(http, store);
+socketService(http, store, sessionMiddleware);
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(sessionMiddleware);

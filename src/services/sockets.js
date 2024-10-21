@@ -1,14 +1,19 @@
 import { Server } from 'socket.io';
 import { v4 as uuid } from 'uuid';
-import { sessionMiddleware } from '../../index.js';
-import { store } from "../../index.js";
 
-export function socketService(httpServer) {
+export function socketService(httpServer, store, sessionMiddleware) {
   const io = new Server(httpServer);
   io.engine.use(sessionMiddleware);
 
   io.on('connection', (socket) => {
+    // let connectedUser = socket.request.session.user;
+    // connectedUser.connected = true;
+    // store.set(socket.request.session.id, connectedUser, (err) => {
+    //   if (err) console.error(err);
+    // })
+
     console.log(`new connection ${socket.id}`);
+    console.log("store session updated: ", store.sessions);
 
     socket.emit("session", {
       userId: socket.request.session.user.id
@@ -43,17 +48,6 @@ export function socketService(httpServer) {
       })
     })
 
-    socket.on('userMessage', async ({ message, receiverSessionID }) => {
-      const sockets = await io.fetchSockets();
-      const socketFiltered = sockets.find(s => s.request.session.id === receiverSessionID);
-      const receiverSocketID = socketFiltered.id;
-      console.log(`--- message to: ${receiverSessionID} --- socketID: ${receiverSocketID}`);
-
-      // const newMessage = new Message();
-
-      io.to(receiverSocketID).emit('userMessage', message);
-    })
-
     // socket.on('reqGroups', () => {
     //   io.emit('groups', GROUPS);
     // });
@@ -64,9 +58,9 @@ export function socketService(httpServer) {
     //   io.emit('groups', GROUPS);
     // })
 
-    socket.on('joinGroupChat', (groupID) => {
-      socket.join(groupID);
-    });
+    // socket.on('joinGroupChat', (groupID) => {
+    //   socket.join(groupID);
+    // });
 
     socket.on('groupMessage', async ({ message, groupReceiverID }) => {
       const senderSocketId = socket.id;
@@ -76,17 +70,23 @@ export function socketService(httpServer) {
       socket.broadcast.to(groupReceiverID).emit('groupMessage', { message: message, sender: senderSocket.request.session.user });
     })
 
-    socket.on('disconnect', () => {
-      io.emit('reqSocketsID');
-      console.log('disconnected: ' + socket.id);
-    });
-  });
-}
+    socket.on("disconnect", async () => {
+      const desconnectedUser = socket.request.session.user;
+      const matchingSockets = await io.in(desconnectedUser.id).fetchSockets(); // if sockets are still in other tabs
+      const isDisconnected = matchingSockets.length === 0;
+      if (isDisconnected) {
+        socket.broadcast.emit("user disconnected", desconnectedUser.id);
+        desconnectedUser.connected = false;
+        const newSession = socket.request.session;
+        newSession.user = desconnectedUser;
+        const sessionId = socket.request.session.id;
+        // FOLLOWING CODE COULD MODIFY ADDITIONAL SESSION PROPERTIES (EXPIRES, ...)
+        store.set(sessionId, newSession, (err) => {
+          if (err) console.error(err);
+          console.log("session store updated: ", store.sessions);
+        })
+      }
+    })
 
-function filterChats(sessions, userSessionID) {
-  return Object.keys(sessions).filter(sessionID => sessionID !== userSessionID)
-    .reduce((obj, key) => {
-      obj[key] = sessions[key];
-      return obj;
-    }, {});
+  })
 }

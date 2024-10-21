@@ -9,6 +9,10 @@ socket.on("private message", ({ message, from, to }) => {
   renderReceiverMessage(message);
 })
 
+socket.on("user disconnected", ({ userId }) => {
+  console.log('user disconnected', userId);
+})
+
 sendButton.onclick = () => {
   console.log('send button clicked');
   sendMessage();
