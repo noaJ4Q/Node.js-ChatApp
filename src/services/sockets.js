@@ -6,14 +6,15 @@ export function socketService(httpServer, store, sessionMiddleware) {
   io.engine.use(sessionMiddleware);
 
   io.on('connection', (socket) => {
-    // let connectedUser = socket.request.session.user;
-    // connectedUser.connected = true;
-    // store.set(socket.request.session.id, connectedUser, (err) => {
-    //   if (err) console.error(err);
-    // })
-
-    console.log(`new connection ${socket.id}`);
-    console.log("store session updated: ", store.sessions);
+    const connectedUser = socket.request.session.user;
+    const newSession = socket.request.session;
+    const sessionId = socket.request.session.id;
+    connectedUser.connected = true;
+    newSession.user = connectedUser;
+    store.set(sessionId, newSession, (err) => {
+      if (err) console.error(err);
+      console.log("store session updated (connection): ", store.sessions);
+    })
 
     socket.emit("session", {
       userId: socket.request.session.user.id
@@ -83,7 +84,7 @@ export function socketService(httpServer, store, sessionMiddleware) {
         // FOLLOWING CODE COULD MODIFY ADDITIONAL SESSION PROPERTIES (EXPIRES, ...)
         store.set(sessionId, newSession, (err) => {
           if (err) console.error(err);
-          console.log("session store updated: ", store.sessions);
+          console.log("session store updated (disconnect): ", store.sessions);
         })
       }
     })
