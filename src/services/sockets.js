@@ -76,7 +76,7 @@ export function socketService(httpServer, store, sessionMiddleware) {
       const matchingSockets = await io.in(desconnectedUser.id).fetchSockets(); // if sockets are still in other tabs
       const isDisconnected = matchingSockets.length === 0;
       if (isDisconnected) {
-        socket.broadcast.emit("user disconnected", desconnectedUser.id);
+        socket.broadcast.emit("user disconnected", { userId: desconnectedUser.id });
         desconnectedUser.connected = false;
         const newSession = socket.request.session;
         newSession.user = desconnectedUser;

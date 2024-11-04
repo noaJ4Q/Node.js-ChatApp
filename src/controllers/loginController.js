@@ -8,7 +8,7 @@ export class loginController {
 
   static login(req, res) {
     const { name, lastName, rememberMe } = req.body;
-    const newUser = new User(uuid(), name, lastName, "", true);
+    const newUser = new User(uuid(), name, lastName, "", false);
     req.session.user = newUser;
 
     if (rememberMe) {

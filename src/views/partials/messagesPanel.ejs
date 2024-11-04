@@ -5,10 +5,12 @@
       <%= receiver.name %>
         <%= receiver.lastName %>
     </h2>
-    <p class="text-sm text-slate-500">
-      <span class="inline-block w-2.5 h-2.5 <%= receiver.connected ? " bg-green-500" : "bg-red-500" %> rounded-full
-        mr-1"></span>
-      <%= receiver.connected ? "online" : "offline" %>
+    <p id="user-status" class="text-sm text-slate-500">
+      <span class="inline-block w-2.5 h-2.5 rounded-full mr-1 <%= receiver.connected ? " bg-green-500" : "bg-red-500"
+        %>"></span>
+      <span>
+        <%= receiver.connected ? "online" : "offline" %>
+      </span>
     </p>
   </div>
   <div id="chat-messages" class="text-sm px-4">

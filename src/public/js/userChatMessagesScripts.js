@@ -10,7 +10,8 @@ socket.on("private message", ({ message, from, to }) => {
 })
 
 socket.on("user disconnected", ({ userId }) => {
-  console.log('user disconnected', userId);
+  console.log("user disconnected", userId);
+  updateUserStatus("offline");
 })
 
 sendButton.onclick = () => {
@@ -55,4 +56,18 @@ function renderReceiverMessage(message) {
   chatMessage.appendChild(chatContent);
 
   messagesWrapper.appendChild(chatMessage);
+}
+
+function updateUserStatus(newStatus) {
+  const userStatusElement = document.getElementById("user-status");
+  const statusSignElement = userStatusElement.getElementsByTagName("span")[0].classList;
+  const statusTextElement = userStatusElement.getElementsByTagName("span")[1];
+  statusTextElement.textContent = newStatus;
+  if (newStatus === "offline") {
+    statusSignElement.remove("bg-green-500");
+    statusSignElement.add("bg-red-500");
+  } else {
+    statusSignElement.remove("bg-red-500");
+    statusSignElement.add("bg-green-500");
+  }
 }

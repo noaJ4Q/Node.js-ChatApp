@@ -20,6 +20,9 @@ socket.on("user connected", ({ user }) => {
   if (!chatIds.includes(user.id)) {
     renderChatRoom(user);
   }
+  if (chatWith(user)) {
+    updateUserStatus("online");
+  }
 })
 
 function renderChatRoom(user) {
@@ -63,4 +66,24 @@ function getRenderedChats() {
     .map(anchor => {
       return anchor.getAttribute("href").split("/").pop();
     })
+}
+
+function chatWith(user) {
+  const url = window.location.href;
+  const userId = url.split("/").pop();
+  return user.id === userId;
+}
+
+function updateUserStatus(newStatus) {
+  const userStatusElement = document.getElementById("user-status");
+  const statusSignElement = userStatusElement.getElementsByTagName("span")[0].classList;
+  const statusTextElement = userStatusElement.getElementsByTagName("span")[1];
+  statusTextElement.textContent = newStatus;
+  if (newStatus === "offline") {
+    statusSignElement.remove("bg-green-500");
+    statusSignElement.add("bg-red-500");
+  } else {
+    statusSignElement.remove("bg-red-500");
+    statusSignElement.add("bg-green-500");
+  }
 }
