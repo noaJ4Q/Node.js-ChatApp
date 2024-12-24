@@ -1,7 +1,8 @@
 import { Server } from 'socket.io';
+import { store } from '../../index.js';
 import { v4 as uuid } from 'uuid';
 
-export function socketService(httpServer, store, sessionMiddleware) {
+export function socketService(httpServer, sessionMiddleware) {
   const io = new Server(httpServer);
   io.engine.use(sessionMiddleware);
 

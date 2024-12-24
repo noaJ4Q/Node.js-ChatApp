@@ -29,7 +29,7 @@ const sessionMiddleware = session({
   store
 });
 
-socketService(http, store, sessionMiddleware);
+socketService(http, sessionMiddleware);
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(sessionMiddleware);
@@ -43,6 +43,6 @@ http.listen(PORT, () => {
 });
 
 // TODO:
+// - Handle relogin when user login with same name
 // - Add background messages feature
 // - Add POO approach
-// - Fix render method of messages for sender (should render based on logued user)
