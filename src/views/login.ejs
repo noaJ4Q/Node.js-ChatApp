@@ -26,6 +26,11 @@
         </section>
         <input type="submit" value="Start chat"
           class="text-sm text-white p-4 rounded-lg bg-indigo-500 hover:cursor-pointer hover:bg-indigo-600 duration-300">
+        <% if (errorMessage) {%>
+          <p class="text-center text-red-400">
+            <%= errorMessage %>
+          </p>
+          <% } %>
       </form>
     </div>
   </main>

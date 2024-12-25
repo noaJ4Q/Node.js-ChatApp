@@ -43,6 +43,6 @@ http.listen(PORT, () => {
 });
 
 // TODO:
-// - Handle relogin when user login with same name
+// - Fix error of undefined propertie: connectedUser.connected = true (sockets.js:13)
 // - Add background messages feature
 // - Add POO approach

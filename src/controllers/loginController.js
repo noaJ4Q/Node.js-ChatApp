@@ -4,13 +4,16 @@ import { v4 as uuid } from 'uuid';
 
 export class loginController {
   static showPage(req, res) {
-    res.status(200).render('login.ejs');
+    const errorMessage = req.session.errorMessage;
+    delete req.session.errorMessage;
+    res.status(200).render('login.ejs', {
+      errorMessage
+    });
   }
 
   static login(req, res) {
 
     let validUser = true;
-    let msg;
     let userInSession;
     // get name and last name
     const { name, lastName, rememberMe } = req.body;
@@ -21,7 +24,7 @@ export class loginController {
         if (session.user.name === name && session.user.lastName === lastName) {
           if (session.user.connected) {
             validUser = false;
-            msg = "User is already connected";
+            break;
           }
           else {
             // log with that session
@@ -33,7 +36,9 @@ export class loginController {
       }
       // userInSession = new User(uuid(), name, lastName, "", false);
       if (!validUser) {
-        console.log("User already exists but is connected");
+        console.log("User already exists and it is connected");
+        console.log("[INVALID USER] Current sessions: ", sessions);
+        req.session.errorMessage = "User is already connected";
         return res.redirect("/");
       }
 
