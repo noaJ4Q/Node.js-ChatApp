@@ -5,6 +5,19 @@ const chatInput = document.getElementById('message');
 const sendButton = document.getElementById('send');
 const receiver = document.getElementById('receiver-data');
 
+loadMessages();
+
+socket.on("load messages", ({ messages }) => {
+  console.log("past messages", messages);
+  messages.forEach(message => {
+    if (message.senderId === socket.userId) {
+      renderSenderMessage(message.content);
+    } else {
+      renderReceiverMessage(message.content);
+    }
+  });
+})
+
 socket.on("private message", ({ message, from, to }) => {
   renderReceiverMessage(message);
 })
@@ -24,6 +37,11 @@ chatInput.addEventListener('keydown', (e) => {
     sendMessage();
   }
 })
+
+function loadMessages() {
+  const userId = receiver.value;
+  socket.emit("load messages", { chatWithId: userId });
+}
 
 function sendMessage() {
   const message = chatInput.value;

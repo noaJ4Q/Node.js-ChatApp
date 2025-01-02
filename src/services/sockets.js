@@ -1,12 +1,17 @@
 import { Server } from 'socket.io';
 import { store } from '../../index.js';
+import { PrivateMessage } from '../models/PrivateMessage.js';
 import { v4 as uuid } from 'uuid';
+
+const MESSAGES = [];
 
 export function socketService(httpServer, sessionMiddleware) {
   const io = new Server(httpServer);
   io.engine.use(sessionMiddleware);
 
   io.on('connection', (socket) => {
+
+    //update user status when connect
     const connectedUser = socket.request.session.user;
     const newSession = socket.request.session;
     const sessionId = socket.request.session.id;
@@ -24,6 +29,19 @@ export function socketService(httpServer, sessionMiddleware) {
     socket.join(socket.request.session.user.id);
 
     const users = [];
+    const messagesPerUser = new Map();
+
+    // MESSAGES.filter(m => m.senderId === connectedUser.id || m.receiverId === connectedUser.id).forEach(message => {
+    //   const otherUser = message.senderId === connectedUser.id ? message.receiverId : message.senderId;
+    //   if (messagesPerUser.has(otherUser)) {
+    //     messagesPerUser.get(otherUser).push(message);
+    //   } else {
+    //     messagesPerUser.set(otherUser, [message]);
+    //   }
+    // });
+    // console.log("messagesPerUser", messagesPerUser.get(connectedUser.id));
+    // io.to(connectedUser.id).emit("past messages", { messages: messagesPerUser.get(connectedUser.id) });
+
     store.all((err, sessions) => {
       if (err) console.error(err);
       for (const sessionId in sessions) {
@@ -31,6 +49,11 @@ export function socketService(httpServer, sessionMiddleware) {
         users.push(session.user);
       }
       socket.emit("user list", users);
+    })
+
+    socket.on("load messages", ({ chatWithId }) => {
+      const messages = MESSAGES.filter(m => (m.senderId === connectedUser.id && m.receiverId === chatWithId) || (m.senderId === chatWithId && m.receiverId === connectedUser.id));
+      io.to(connectedUser.id).emit("load messages", { messages });
     })
 
     socket.broadcast.emit("user connected", {
@@ -43,6 +66,11 @@ export function socketService(httpServer, sessionMiddleware) {
       //   message,
       //   from: socket.request.session.user.id
       // })
+
+      // save message in memory
+      const newMessage = new PrivateMessage(uuid(), socket.request.session.user.id, to, message, new Date());
+      MESSAGES.push(newMessage);
+
       io.to(to).emit("private message", {
         message,
         from: socket.request.session.user.id,
