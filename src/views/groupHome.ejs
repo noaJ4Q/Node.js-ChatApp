@@ -17,7 +17,7 @@
 <body class="bg-slate-100">
   <main>
     <%- include('partials/sidebarPanel.ejs') %>
-      <%- include('partials/groupListPanel.ejs') %>
+      <%- include('partials/groupListPanel.ejs', { groups }) %>
         <%- include('partials/noMessagesPanel.ejs') %>
           <%- include('partials/modalCreateGroup.ejs') %>
   </main>

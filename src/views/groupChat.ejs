@@ -18,8 +18,8 @@
 <body class="bg-slate-100">
   <main>
     <%- include("partials/sidebarPanel.ejs") %>
-      <%- include("partials/groupListPanel.ejs") %>
-        <%- include("partials/messagesPanel.ejs", { title: title, receiverID: receiverID }) %>
+      <%- include("partials/groupListPanel.ejs", { groups }) %>
+        <%- include("partials/groupMessagesPanel.ejs", { title, receiverID }) %>
           <%- include('partials/modalCreateGroup.ejs') %>
   </main>
 </body>

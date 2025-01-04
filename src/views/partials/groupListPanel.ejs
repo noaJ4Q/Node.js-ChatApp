@@ -6,6 +6,18 @@
   </div>
   <div id="groups-list" class="p-4 text-sm">
     <div id="groups-wrapper">
+      <% for (const group of groups) { %>
+        <a href="/home/groups/<%= group.id %>">
+          <div class="chat p-3 rounded-lg hover:bg-indigo-50 duration-300">
+            <img class="avatar" src="https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg" alt="/">
+            <h3 class="name font-semibold text-base">
+              <%= group.name %>
+            </h3>
+            <p class="time text-slate-400 font-semibold">1h</p>
+            <p class="preview text-slate-500">chat content</p>
+          </div>
+        </a>
+        <% } %>
     </div>
   </div>
 </section>

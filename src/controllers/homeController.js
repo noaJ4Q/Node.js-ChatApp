@@ -1,3 +1,5 @@
+import { GROUPS } from '../services/sockets.js';
+
 export class homeController {
 
   static showPage(req, res) {
@@ -19,15 +21,12 @@ export class homeController {
       }
     }
 
-    // res.status(200).render('userChat.ejs', {
-    //   sidebar: 1,
-    //   receiverId: userId
-    // });
   }
 
   static showGroups(req, res) {
     res.status(200).render('groupHome.ejs', {
-      sidebar: 2
+      sidebar: 2,
+      groups: GROUPS
     });
   }
 
@@ -36,6 +35,7 @@ export class homeController {
     const group = GROUPS.find(g => g.id === groupID);
     res.status(200).render('groupChat.ejs', {
       sidebar: 2,
+      groups: GROUPS,
       title: group.name, receiverID: group.id
     });
   }

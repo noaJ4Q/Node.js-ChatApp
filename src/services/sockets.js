@@ -1,8 +1,10 @@
 import { Server } from 'socket.io';
 import { store } from '../../index.js';
 import { PrivateMessage } from '../models/PrivateMessage.js';
+import { GroupChat } from '../models/GroupChat.js';
 import { v4 as uuid } from 'uuid';
 
+export const GROUPS = [];
 const MESSAGES = [];
 
 export function socketService(httpServer, sessionMiddleware) {
@@ -30,17 +32,6 @@ export function socketService(httpServer, sessionMiddleware) {
 
     const users = [];
     const messagesPerUser = new Map();
-
-    // MESSAGES.filter(m => m.senderId === connectedUser.id || m.receiverId === connectedUser.id).forEach(message => {
-    //   const otherUser = message.senderId === connectedUser.id ? message.receiverId : message.senderId;
-    //   if (messagesPerUser.has(otherUser)) {
-    //     messagesPerUser.get(otherUser).push(message);
-    //   } else {
-    //     messagesPerUser.set(otherUser, [message]);
-    //   }
-    // });
-    // console.log("messagesPerUser", messagesPerUser.get(connectedUser.id));
-    // io.to(connectedUser.id).emit("past messages", { messages: messagesPerUser.get(connectedUser.id) });
 
     store.all((err, sessions) => {
       if (err) console.error(err);
@@ -82,11 +73,11 @@ export function socketService(httpServer, sessionMiddleware) {
     //   io.emit('groups', GROUPS);
     // });
 
-    // socket.on('create-group', (groupName) => {
-    //   const newGroup = new GroupChat(uuid(), groupName);
-    //   GROUPS.push(newGroup);
-    //   io.emit('groups', GROUPS);
-    // })
+    socket.on('create-group', (groupName) => {
+      const newGroup = new GroupChat(uuid(), groupName);
+      GROUPS.push(newGroup);
+      io.emit('groups', GROUPS);
+    })
 
     // socket.on('joinGroupChat', (groupID) => {
     //   socket.join(groupID);

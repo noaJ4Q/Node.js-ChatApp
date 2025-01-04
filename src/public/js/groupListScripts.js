@@ -2,7 +2,7 @@ import { socket } from '/js/commonScripts.js';
 
 const modal = document.getElementById('create-group-modal');
 const openModalButton = document.getElementById('create-group');
-const form = document.getElementById('create-group-form');
+const createGroupform = document.getElementById('create-group-form');
 const groupsWrapper = document.getElementById('groups-wrapper');
 
 socket.emit('reqGroups');
@@ -14,9 +14,9 @@ socket.on('groups', (groups) => {
   }
 })
 
-form.onsubmit = (e) => {
+createGroupform.onsubmit = (e) => {
   e.preventDefault();
-  const groupName = form.name.value;
+  const groupName = createGroupform.name.value;
   console.log(groupName);
   socket.emit('create-group', groupName);
   closeModal();

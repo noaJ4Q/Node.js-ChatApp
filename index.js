@@ -43,6 +43,5 @@ http.listen(PORT, () => {
 });
 
 // TODO:
-// - Add group chat feature
+// - handle group messages
 // - Add background messages feature
-// - Add POO approach
