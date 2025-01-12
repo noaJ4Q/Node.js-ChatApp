@@ -79,9 +79,9 @@ export function socketService(httpServer, sessionMiddleware) {
       io.emit('groups', GROUPS);
     })
 
-    // socket.on('joinGroupChat', (groupID) => {
-    //   socket.join(groupID);
-    // });
+    socket.on('joinGroupChat', (groupID) => {
+      socket.join(groupID);
+    });
 
     socket.on('groupMessage', async ({ message, groupReceiverID }) => {
       const senderSocketId = socket.id;
