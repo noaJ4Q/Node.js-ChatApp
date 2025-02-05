@@ -3,10 +3,23 @@ import { socket } from '/js/commonScripts.js';
 const chatInput = document.getElementById('message');
 const sendButton = document.getElementById('send');
 const receiver = document.getElementById('receiver-data');
-
 const messagesWrapper = document.getElementById('chat-messages');
 
-socket.emit('joinGroupChat', receiver.value);
+socket.emit('joinGroupChat', { groupID: receiver.value });
+
+loadMessages();
+
+socket.on("load group messages", ({ messages }) => {
+  console.log(messages);
+  messages.forEach(message => {
+    if (message.senderId === socket.userId) {
+      renderSenderGroupMessage(message.content);
+    } else {
+      renderReceiverGroupMessage(message.content, message.sender);
+    }
+  });
+})
+
 
 socket.on('groupMessage', ({ message, sender }) => {
   renderReceiverGroupMessage(message, sender);
@@ -21,6 +34,10 @@ chatInput.addEventListener('keydown', (e) => {
     sendGroupMessage();
   }
 })
+
+function loadMessages() {
+  socket.emit("load group messages", { groupChatId: receiver.value });
+}
 
 function sendGroupMessage() {
   const message = chatInput.value;
@@ -43,8 +60,8 @@ function renderSenderGroupMessage(message) {
 }
 
 function renderReceiverGroupMessage(message, sender) {
-  console.log(message);
-  console.log(sender);
+  // console.log(message);
+  // console.log(sender);
   const chatContent = document.createElement('p');
   chatContent.className = 'message w-fit ml-0 mr-auto bg-gray-200 rounded-lg px-3 py-2 my-2 text-black';
   chatContent.textContent = message;

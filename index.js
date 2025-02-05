@@ -43,5 +43,6 @@ http.listen(PORT, () => {
 });
 
 // TODO:
-// - handle group messages
+// - save and load group messages -> check bug: messages not loading
+// - show number of users in group
 // - Add background messages feature
