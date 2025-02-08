@@ -58,7 +58,7 @@ export function socketService(httpServer, sessionMiddleware) {
       console.log("messages total: ", GROUP_MESSAGES);
       const messages = GROUP_MESSAGES.filter(m => m.groupReceiverID === groupChatId);
       console.log("messages filtered: ", messages);
-      io.to(groupChatId).emit("load group messages", { messages });
+      io.to(connectedUser.id).emit("load group messages", { messages });
     });
 
     socket.broadcast.emit("user connected", {

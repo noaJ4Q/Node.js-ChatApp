@@ -11,6 +11,7 @@ loadMessages();
 
 socket.on("load group messages", ({ messages }) => {
   console.log(messages);
+  console.log(socket.userId);
   messages.forEach(message => {
     if (message.senderId === socket.userId) {
       renderSenderGroupMessage(message.content);

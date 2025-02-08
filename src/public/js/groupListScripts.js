@@ -5,6 +5,10 @@ const openModalButton = document.getElementById('create-group');
 const createGroupform = document.getElementById('create-group-form');
 const groupsWrapper = document.getElementById('groups-wrapper');
 
+socket.on("session", ({ userId }) => {
+  socket.userId = userId;
+})
+
 socket.emit('reqGroups');
 
 socket.on('groups', (groups) => {
