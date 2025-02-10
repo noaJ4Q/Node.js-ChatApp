@@ -19,7 +19,7 @@
   <main>
     <%- include("partials/sidebarPanel.ejs") %>
       <%- include("partials/groupListPanel.ejs", { groups }) %>
-        <%- include("partials/groupMessagesPanel.ejs", { title, receiverID }) %>
+        <%- include("partials/groupMessagesPanel.ejs", { title, receiverID, numberOfUsers }) %>
           <%- include('partials/modalCreateGroup.ejs') %>
   </main>
 </body>

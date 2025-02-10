@@ -43,6 +43,5 @@ http.listen(PORT, () => {
 });
 
 // TODO:
-// - save and load group messages -> check bug: messages not loading
-// - show number of users in group
-// - Add background messages feature
+// - show message and hour from last message in chat preview
+// - set different images for each user and group

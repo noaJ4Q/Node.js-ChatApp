@@ -33,10 +33,18 @@ export class homeController {
   static showGroupChat(req, res) {
     const { groupID } = req.params;
     const group = GROUPS.find(g => g.id === groupID);
+    const user = req.session.user;
+
+    const contains = group.users.some(u => u.id === user.id);
+    if (!contains) {
+      group.users.push(user);
+    }
+
     res.status(200).render('groupChat.ejs', {
       sidebar: 2,
       groups: GROUPS,
-      title: group.name, receiverID: group.id
+      title: group.name, receiverID: group.id,
+      numberOfUsers: group.users.length,
     });
   }
 
