@@ -37,8 +37,8 @@ export function socketService(httpServer, sessionMiddleware) {
     });
 
     const users = [];
-    const messagesPerUser = new Map();
 
+    // get all user chats when connect
     store.all((err, sessions) => {
       if (err) console.error(err);
       for (const sessionId in sessions) {
@@ -100,8 +100,14 @@ export function socketService(httpServer, sessionMiddleware) {
       const sockets = await io.fetchSockets();
       const senderSocket = sockets.find(s => s.id === senderSocketId);
 
-      const newGroupMessage = new GroupMessage(uuid(), senderSocket.request.session.user.id, groupReceiverID, message, new Date());
+      const dateMessage = new Date();
+
+      const newGroupMessage = new GroupMessage(uuid(), senderSocket.request.session.user.id, groupReceiverID, message, dateMessage);
       GROUP_MESSAGES.push(newGroupMessage);
+
+      const group = GROUPS.find(g => g.id === groupReceiverID);
+      group.lastMessage = message;
+      group.lastMessageTime = dateMessage;
 
       // console.log("group messages: ", GROUP_MESSAGES);
 

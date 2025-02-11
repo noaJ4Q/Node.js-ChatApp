@@ -28,9 +28,10 @@ socket.on("user connected", ({ user }) => {
 function renderChatRoom(user) {
   const name = user.name;
   const lastName = user.lastName;
+  const avatar = user.avatar;
 
   const chatPicture = document.createElement('img');
-  chatPicture.src = 'https://i.pinimg.com/736x/fa/47/30/fa4730338dabbd71947d73239891f059.jpg';
+  chatPicture.src = avatar;
   chatPicture.alt = 'Chat picture';
   chatPicture.className = 'avatar';
 

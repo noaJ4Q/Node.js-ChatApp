@@ -44,7 +44,9 @@ export class loginController {
 
       if (!userInSession) {
         console.log("User does not exist");
-        userInSession = new User(uuid(), name, lastName, "", false);
+        const randomId = Math.floor(Math.random() * 100) + 1;
+        const avatarUrl = "https://avatar.iran.liara.run/public/" + randomId;
+        userInSession = new User(uuid(), name, lastName, avatarUrl, false);
       }
 
       req.session.user = userInSession;

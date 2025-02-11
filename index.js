@@ -43,5 +43,4 @@ http.listen(PORT, () => {
 });
 
 // TODO:
-// - show message and hour from last message in chat preview
 // - set different images for each user and group

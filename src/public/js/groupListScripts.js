@@ -48,11 +48,11 @@ function renderGroup(group) {
 
   const chatTime = document.createElement('p');
   chatTime.className = 'time text-slate-400 font-semibold';
-  chatTime.textContent = '1h';
+  chatTime.textContent = '';
 
   const chatContent = document.createElement('p');
   chatContent.className = 'preview text-slate-500';
-  chatContent.textContent = 'chat content';
+  chatContent.textContent = '';
 
   const newChatRoom = document.createElement('div');
   newChatRoom.className = 'chat p-3 rounded-lg hover:bg-indigo-50 duration-300';

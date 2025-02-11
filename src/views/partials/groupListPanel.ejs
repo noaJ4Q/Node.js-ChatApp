@@ -13,8 +13,10 @@
             <h3 class="name font-semibold text-base">
               <%= group.name %>
             </h3>
-            <p class="time text-slate-400 font-semibold">1h</p>
-            <p class="preview text-slate-500">chat content</p>
+            <p class="time text-slate-400 font-semibold"></p>
+            <p class="preview text-slate-500">
+              <%= group.lastMessage %>
+            </p>
           </div>
         </a>
         <% } %>
