@@ -43,4 +43,5 @@ http.listen(PORT, () => {
 });
 
 // TODO:
-// - set different images for each user and group
+// - show last message in private chats
+// - show default image while main loads

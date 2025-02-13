@@ -93,8 +93,6 @@ export function socketService(httpServer, sessionMiddleware) {
       io.emit('groups', GROUPS);
     })
 
-
-
     socket.on('groupMessage', async ({ message, groupReceiverID }) => {
       const senderSocketId = socket.id;
       const sockets = await io.fetchSockets();

@@ -3,7 +3,7 @@ export class GroupChat {
     this.id = id;
     this.name = name;
     this.users = [];
-    this.lastMessage = '';
+    this.lastMessage = 'No messages yet...';
     this.lastMessageTime = ''
   }
 }

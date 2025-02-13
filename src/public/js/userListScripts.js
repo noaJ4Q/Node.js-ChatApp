@@ -41,7 +41,7 @@ function renderChatRoom(user) {
 
   const chatTime = document.createElement('p');
   chatTime.className = 'time text-slate-400 font-semibold';
-  chatTime.textContent = '1h';
+  chatTime.textContent = '';
 
   const chatContent = document.createElement('p');
   chatContent.className = 'preview text-slate-500';

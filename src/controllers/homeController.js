@@ -16,6 +16,7 @@ export class homeController {
       if (sessionData.user.id === userId) {
         return res.status(200).render('userChat.ejs', {
           sidebar: 1,
+          user: req.session.user,
           receiver: sessionData.user
         });
       }
@@ -26,6 +27,7 @@ export class homeController {
   static showGroups(req, res) {
     res.status(200).render('groupHome.ejs', {
       sidebar: 2,
+      user: req.session.user,
       groups: GROUPS
     });
   }
@@ -42,6 +44,7 @@ export class homeController {
 
     res.status(200).render('groupChat.ejs', {
       sidebar: 2,
+      user,
       groups: GROUPS,
       title: group.name, receiverID: group.id,
       numberOfUsers: group.users.length,
