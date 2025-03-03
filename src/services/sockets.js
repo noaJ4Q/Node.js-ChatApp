@@ -46,7 +46,7 @@ export function socketService(httpServer, sessionMiddleware) {
         const lastMessage = MESSAGES.findLast(m => ((m.senderId === connectedUser.id && m.receiverId === session.user.id) || (m.senderId === session.user.id && m.receiverId === connectedUser.id)));
         const userChat = {
           user: session.user,
-          lastMessage: lastMessage ? lastMessage : "No messages...",
+          lastMessage: lastMessage
         }
         usersChat.push(userChat);
       }
@@ -67,8 +67,7 @@ export function socketService(httpServer, sessionMiddleware) {
     });
 
     socket.broadcast.emit("user connected", {
-      user: socket.request.session.user,
-      lastMessage: "No messages..."
+      user: socket.request.session.user
     })
 
     socket.on("private message", ({ message, to }) => {

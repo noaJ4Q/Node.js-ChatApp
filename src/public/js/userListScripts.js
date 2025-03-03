@@ -45,7 +45,11 @@ function renderChatRoom({ user, lastMessage }) {
 
   const chatContent = document.createElement('p');
   chatContent.className = 'preview text-slate-500';
-  chatContent.textContent = lastMessage.content;
+  if (lastMessage) {
+    chatContent.textContent = lastMessage.content;
+  } else {
+    chatContent.textContent = 'No messages yet ...';
+  }
 
   const newChatRoom = document.createElement('div');
   newChatRoom.className = 'chat p-3 rounded-lg hover:bg-indigo-50 duration-300';
