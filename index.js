@@ -42,6 +42,6 @@ http.listen(PORT, () => {
   console.log('Server running on http://localhost:' + PORT);
 });
 
-// TODO:
-// - show last message in private chats
-// - show default image while main loads
+// FUTURE FIXES:
+// - Update in realtime last message preview
+// - Show a default image while main one is loading

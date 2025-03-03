@@ -36,16 +36,21 @@ export function socketService(httpServer, sessionMiddleware) {
       socket.join(groupID);
     });
 
-    const users = [];
+    const usersChat = [];
 
     // get all user chats when connect
     store.all((err, sessions) => {
       if (err) console.error(err);
       for (const sessionId in sessions) {
         const session = sessions[sessionId];
-        users.push(session.user);
+        const lastMessage = MESSAGES.findLast(m => ((m.senderId === connectedUser.id && m.receiverId === session.user.id) || (m.senderId === session.user.id && m.receiverId === connectedUser.id)));
+        const userChat = {
+          user: session.user,
+          lastMessage: lastMessage ? lastMessage : "No messages...",
+        }
+        usersChat.push(userChat);
       }
-      socket.emit("user list", users);
+      socket.emit("user list", usersChat);
     })
 
     socket.on("load messages", ({ chatWithId }) => {
@@ -62,7 +67,8 @@ export function socketService(httpServer, sessionMiddleware) {
     });
 
     socket.broadcast.emit("user connected", {
-      user: socket.request.session.user
+      user: socket.request.session.user,
+      lastMessage: "No messages..."
     })
 
     socket.on("private message", ({ message, to }) => {

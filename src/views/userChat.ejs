@@ -19,7 +19,7 @@
 
 <body class="bg-slate-100">
   <main>
-    <%- include('partials/sidebarPanel.ejs') %>
+    <%- include('partials/sidebarPanel.ejs', { sidebar, user }) %>
       <%- include('partials/userListPanel.ejs') %>
         <%- include('partials/messagesPanel.ejs', { receiver }) %>
   </main>

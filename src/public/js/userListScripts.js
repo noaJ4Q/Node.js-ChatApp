@@ -6,26 +6,26 @@ socket.on("session", ({ userId }) => {
   socket.userId = userId;
 })
 
-socket.on("user list", (users) => {
+socket.on("user list", (usersChat) => {
   chatRoomsWrapper.innerHTML = '';
-  users.forEach(user => {
-    if (user.id !== socket.userId) {
-      renderChatRoom(user);
+  usersChat.forEach(userChat => {
+    if (userChat.user.id !== socket.userId) {
+      renderChatRoom(userChat);
     }
   })
 });
 
-socket.on("user connected", ({ user }) => {
+socket.on("user connected", ({ user, lastMessage }) => {
   const chatIds = getRenderedChats();
   if (!chatIds.includes(user.id)) {
-    renderChatRoom(user);
+    renderChatRoom({ user, lastMessage });
   }
   if (chatWith(user)) {
     updateUserStatus("online");
   }
 })
 
-function renderChatRoom(user) {
+function renderChatRoom({ user, lastMessage }) {
   const name = user.name;
   const lastName = user.lastName;
   const avatar = user.avatar;
@@ -45,7 +45,7 @@ function renderChatRoom(user) {
 
   const chatContent = document.createElement('p');
   chatContent.className = 'preview text-slate-500';
-  chatContent.textContent = 'chat content';
+  chatContent.textContent = lastMessage.content;
 
   const newChatRoom = document.createElement('div');
   newChatRoom.className = 'chat p-3 rounded-lg hover:bg-indigo-50 duration-300';
